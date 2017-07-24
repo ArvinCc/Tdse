@@ -46,10 +46,9 @@ public class TdseHttpFileHandler extends SimpleChannelInboundHandler<FullHttpReq
             //sendError(ctx, METHOD_NOT_ALLOWED);
             return;
         }
-
-        final String uri = request.uri();
+        String uri = request.uri();
         System.out.println("uri"+uri);
-        final String path = sanitizeUri(uri);
+        String path = sanitizeUri(uri);
         if (path == null) {
             sendError(ctx, FORBIDDEN);
             return;
