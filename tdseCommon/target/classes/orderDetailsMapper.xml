@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="orderDetailsMapper">
+
+    <select id="findById" parameterType="long" resultType="com.tdse.mx.dao.OrderDetails">
+        select * from tdse_order_details
+    </select>
+
+    <select id="findOrderDetailsById" parameterType="long" resultType="com.tdse.mx.dao.OrderDetails">
+        select * from tdse_order_details where
+        details_id =#{details_id}
+    </select>
+
+    <select id="findByOrderId" parameterType="long" resultType="com.tdse.mx.dao.OrderDetails">
+        select * from tdse_order_details where
+        details_order_id =#{details_order_id}
+    </select>
+
+    <insert id="addOrderDetails" parameterType="com.tdse.mx.dao.OrderDetails">
+        insert into tdse_order_details(details_id,details_name,details_order_id,details_money,details_start_time,details_end_time,details_user_id)
+        values(#{details_id},#{details_name},#{details_order_id},#{details_money},#{details_start_time},#{details_end_time},#{details_user_id})
+    </insert>
+
+    <delete id="deleteById" parameterType="long">
+        delete from tdse_order_details where
+        details_id=#{details_id}
+    </delete>
+
+    <update id="updateOrderDetails" parameterType="com.tdse.mx.dao.OrderDetails">
+        update tdse_order_details set details_name=#{details_name},details_order_id=#{details_order_id},details_money=#{details_money},details_start_time=#{details_start_time},details_end_time=#{details_end_time},details_user_id=#{details_user_id}
+        where details_id=#{details_id}
+    </update>
+
+</mapper>

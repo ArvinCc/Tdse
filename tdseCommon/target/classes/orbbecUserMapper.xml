@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="orbbecUserMapper">
+
+    <select id="findById" parameterType="long" resultType="com.tdse.mx.dao.OrbUser">
+        select * from tdse_orbbec_user where
+        user_id =#{user_id}
+    </select>
+
+    <select id="findByName" parameterType="String" resultType="com.tdse.mx.dao.OrbUser">
+        select * from tdse_orbbec_user where
+        user_name =#{user_name}
+    </select>
+
+    <insert id="addOrbbecUser" parameterType="com.tdse.mx.dao.OrbUser">
+        insert into tdse_orbbec_user(user_id,user_name,user_sex,user_vip_time,user_signup_time) values (#{user_id},#{user_name},#{user_sex},#{user_vip_time},#{user_signup_time})
+    </insert>
+
+    <delete id="deleteById" parameterType="long">
+        delete from tdse_orbbec_user where
+        user_id=#{user_id}
+    </delete>
+
+    <update id="updateOrbbecUser" parameterType="com.tdse.mx.dao.OrbUser">
+        update tdse_orbbec_user set user_name=#{user_name},user_sex=#{user_sex},user_vip_time=#{user_vip_time},user_signup_time=#{user_signup_time}
+        where user_id=#{user_id}
+    </update>
+
+</mapper>

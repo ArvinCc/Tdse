@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="productMapper">
+
+    <select id="findProduct"  resultType="com.tdse.mx.dao.Product">
+        select * from tdse_product
+    </select>
+
+    <select id="findProductById" parameterType="String" resultType="com.tdse.mx.dao.Product">
+        select * from tdse_product where
+        product_id =#{product_id}
+    </select>
+
+    <select id="findProductByName" parameterType="String" resultType="com.tdse.mx.dao.Product">
+        select * from tdse_product where
+        product_name = #{product_name}
+    </select>
+
+    <select id="findById" parameterType="String" resultType="boolean">
+        select 1 from tdse_product where product_id =#{product_id} limit 1
+    </select>
+
+    <select id="findByName" parameterType="String" resultType="boolean">
+        select 1 from tdse_product where product_name =#{product_name} limit 1
+    </select>
+
+    <insert id="addProduct" parameterType="com.tdse.mx.dao.Product">
+        insert into tdse_product(product_id,product_name,product_theme_name,product_money,product_introduce,product_grade,product_download_number,product_edition,product_state,product_pkg_name)
+        values(#{product_id},#{product_name},#{product_theme_name},#{product_money},#{product_introduce},#{product_grade},#{product_download_number},#{product_edition},#{product_state},#{product_pkg_name})
+    </insert>
+
+    <delete id="deleteById" parameterType="String">
+        delete from tdse_product where
+        product_id=#{product_id}
+    </delete>
+
+    <delete id="deleteByName" parameterType="String">
+        delete from tdse_product where
+        product_name=#{product_name}
+    </delete>
+
+    <update id="updateProduct" parameterType="com.tdse.mx.dao.Product">
+        update tdse_product set product_name=#{product_name},product_theme_name=#{product_theme_name},product_money=#{product_money},product_introduce=#{product_introduce},product_grade=#{product_grade},product_download_number=#{product_download_number},product_edition=#{product_edition},product_state=#{product_state},product_pkg_name=#{product_pkg_name}
+        where product_id=#{product_id}
+    </update>
+
+</mapper>

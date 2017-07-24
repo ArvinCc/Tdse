@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ProjectModuleManager">
+    <modules>
+      <module fileurl="file://$PROJECT_DIR$/tdseCommon/tdseCommon.iml" filepath="$PROJECT_DIR$/tdseCommon/tdseCommon.iml" />
+      <module fileurl="file://$PROJECT_DIR$/tdseService/tdseService.iml" filepath="$PROJECT_DIR$/tdseService/tdseService.iml" />
+      <module fileurl="file://$PROJECT_DIR$/tdseUi/tdseUi.iml" filepath="$PROJECT_DIR$/tdseUi/tdseUi.iml" />
+    </modules>
+  </component>
+</project>

@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="userMapper">
+
+    <!--根据ID获取对应的值  -->
+    <select id="findUser"  resultType="com.tdse.mx.dao.User">
+        select * from tdse_user
+    </select>
+
+    <!--根据ID获取对应的值  -->
+    <select id="findUserById" parameterType="long" resultType="com.tdse.mx.dao.User">
+        select * from tdse_user where
+        user_id =#{user_id}
+    </select>
+
+    <select id="findUserByPhone" parameterType="long" resultType="com.tdse.mx.dao.User">
+        select * from tdse_user where
+        user_phone_number = #{user_phone_number}
+    </select>
+
+    <select id="findUserByName" parameterType="String" resultType="com.tdse.mx.dao.User">
+        select * from tdse_user where
+        user_name = #{user_name}
+    </select>
+
+    <select id="findById" parameterType="long" resultType="boolean">
+        select 1 from tdse_user where user_id =#{user_id} limit 1
+    </select>
+
+    <select id="findByPhone" parameterType="long" resultType="boolean">
+        select 1 from tdse_user where user_phone_number =#{user_phone_number} limit 1
+    </select>
+
+    <select id="findByName" parameterType="String" resultType="boolean">
+        select 1 from tdse_user where user_name =#{user_name} limit 1
+    </select>
+
+    <insert id="addUser" parameterType="com.tdse.mx.dao.User">
+        <!--insert into tdse_user(user_id,user_name,user_password,user_phone_number,user_signup_time) values(#{user_id},#{user_name},#{user_password},#{user_phone_number},#{user_signup_time})-->
+
+        insert into tdse_user(user_id,user_name,user_password,user_phone_number,user_signup_time) values(#{user_id},#{user_name},#{user_password},#{user_phone_number},#{user_signup_time})
+    </insert>
+
+    <delete id="deleteById" parameterType="long">
+        delete from tdse_user where
+        user_id=#{user_id}
+    </delete>
+
+    <delete id="deleteByName" parameterType="String">
+        delete from tdse_user where
+        user_name=#{user_name}
+    </delete>
+
+    <delete id="deleteByPhone" parameterType="long">
+        delete from tdse_user where
+        user_phone_number=#{user_phone_number}
+    </delete>
+
+    <update id="updateUser" parameterType="com.tdse.mx.dao.User">
+        update tdse_user set user_name=#{user_name},user_password=#{user_password},user_phone_number=#{user_phone_number},user_signup_time=#{user_signup_time} where user_id=#{user_id}
+    </update>
+
+</mapper>

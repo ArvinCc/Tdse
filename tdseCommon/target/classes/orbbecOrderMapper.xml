@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="orbbecOrderMapper">
+
+    <select id="findById" parameterType="String" resultType="com.tdse.mx.dao.OrbOrder">
+        select * from tdse_orbbec_order where
+        order_id =#{order_id}
+    </select>
+
+    <select id="find" resultType="com.tdse.mx.dao.OrbOrder">
+        select * from tdse_orbbec_order
+    </select>
+
+    <select id="findByUserName" parameterType="String" resultType="com.tdse.mx.dao.OrbOrder">
+        select * from tdse_orbbec_order where
+        order_user_name =#{order_user_name}
+    </select>
+
+    <insert id="addOrbbecOrder" parameterType="com.tdse.mx.dao.OrbOrder">
+        insert into tdse_orbbec_order(order_id,order_user_name,order_payment_user_name,order_establish_time,order_deal_time,order_appid,order_goods_id,order_fee_type,order_uint_price,order_count,order_total_fee,order_orb_order,order_sign) values (#{order_id},#{order_user_name},#{order_payment_user_name},#{order_establish_time},#{order_deal_time},#{order_appid},#{order_goods_id},#{order_fee_type},#{order_uint_price},#{order_count},#{order_total_fee},#{order_orb_order},#{order_sign})
+    </insert>
+
+    <delete id="deleteById" parameterType="String">
+        delete from tdse_orbbec_order where
+        order_id=#{order_id}
+    </delete>
+
+    <update id="updateOrbbecOrder" parameterType="com.tdse.mx.dao.OrbOrder">
+        update tdse_orbbec_order set order_user_name=#{order_user_name},order_payment_user_name=#{order_payment_user_name},order_establish_time=#{order_establish_time},order_deal_time=#{order_deal_time},order_appid=#{order_appid},order_goods_id=#{order_goods_id},order_fee_type=#{order_fee_type},order_uint_price=#{order_uint_price},order_count=#{order_count},order_total_fee=#{order_total_fee},order_orb_order=#{order_orb_order},order_sign=#{order_sign}
+        where order_id=#{order_id}
+    </update>
+
+</mapper>
