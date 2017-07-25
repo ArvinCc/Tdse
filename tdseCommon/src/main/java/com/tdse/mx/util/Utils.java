@@ -195,19 +195,30 @@ public class Utils {
      */
     public static byte [] msgPkg(String pkgId,byte []  content)
     {
+//        byte[] bytesHead ="mxs".getBytes();
+//        byte[] bytesId =pkgId.getBytes();
+//
+//        String str=String.format("%1$-8s", ""+content.length);
+//        byte[] bytesLength =str.getBytes();
+//        byte[] bytesTail="mxe".getBytes();
+//
+//        byte[] bytes =new byte[bytesHead.length+bytesId.length+bytesLength.length+content.length+bytesTail.length];
+//
+//        System.arraycopy(bytesHead,0,bytes,0,bytesHead.length);
+//        System.arraycopy(bytesId,0,bytes,bytesHead.length,bytesId.length);
+//        System.arraycopy(bytesLength,0,bytes,bytesHead.length+bytesId.length,bytesLength.length);
+//        System.arraycopy(content,0,bytes,bytesHead.length+bytesId.length+bytesLength.length,content.length);
+//        System.arraycopy(bytesTail,0,bytes,bytesHead.length+bytesId.length+bytesLength.length+content.length,bytesTail.length);
+
         byte[] bytesId =pkgId.getBytes();
 
         String str=String.format("%1$-8s", ""+content.length);
         byte[] bytesLength =str.getBytes();
-
-        byte[] bytesTail="mx".getBytes();
-
-        byte[] bytes =new byte[bytesId.length+bytesLength.length+content.length+bytesTail.length];
+        byte[] bytes =new byte[bytesId.length+bytesLength.length+content.length];
 
         System.arraycopy(bytesId,0,bytes,0,bytesId.length);
         System.arraycopy(bytesLength,0,bytes,bytesId.length,bytesLength.length);
         System.arraycopy(content,0,bytes,bytesId.length+bytesLength.length,content.length);
-        System.arraycopy(bytesTail,0,bytes,bytesId.length+bytesLength.length+content.length,bytesTail.length);
         return bytes;
     }
 

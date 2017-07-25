@@ -80,7 +80,6 @@ public class SocketEventManager extends Event
         {
             case REQUEST_GET:
                 return   getDistribute(msg);
-
             case REQUEST_POST:
                 return   postDistribute(msg);
         }

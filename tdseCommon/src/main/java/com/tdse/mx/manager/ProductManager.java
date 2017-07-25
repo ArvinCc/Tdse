@@ -61,12 +61,10 @@ public class ProductManager
      * @param id 产品编号
      * @return 是否成功
      */
-    public boolean removeId(String id){
-
-
+    public boolean removeId(String id)
+    {
         return  false;
     }
-
 
     /**
      *  根据产品名字删除产品所有信息
