@@ -30,6 +30,7 @@ public class OrbOrderImpl implements IOrbbecOrder
             Reader reader = Resources.getResourceAsReader(resource);
             sessionFactory = new SqlSessionFactoryBuilder().build(reader);
             session = sessionFactory.openSession();
+
         } catch (IOException e) {
             e.printStackTrace();
         }

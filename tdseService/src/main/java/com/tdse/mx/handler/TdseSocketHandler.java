@@ -5,8 +5,12 @@ import com.tdse.mx.server.FileDemo;
 import com.tdse.mx.util.Utils;
 import io.netty.buffer.ByteBuf;
 import io.netty.buffer.Unpooled;
+import io.netty.channel.ChannelFuture;
+import io.netty.channel.ChannelFutureListener;
 import io.netty.channel.ChannelHandlerContext;
 import io.netty.channel.ChannelInboundHandlerAdapter;
+
+import java.util.*;
 
 /**
  * Created by Administrator on 2017/6/15.
@@ -59,7 +63,8 @@ public class TdseSocketHandler extends ChannelInboundHandlerAdapter
      * @throws Exception
      */
     @Override
-    public void channelWritabilityChanged(ChannelHandlerContext ctx) throws Exception {
+    public void channelWritabilityChanged(ChannelHandlerContext ctx) throws Exception
+    {
         super.channelWritabilityChanged(ctx);
     }
 
@@ -147,18 +152,26 @@ public class TdseSocketHandler extends ChannelInboundHandlerAdapter
     public void channelRead(ChannelHandlerContext ctx, Object msg) throws Exception
     {
             try {
-
                 ByteBuf buf = (ByteBuf) msg;
                 byte[] req = new byte[buf.readableBytes()];
                 buf.readBytes(req);
                 ByteBuf resp = Unpooled.copiedBuffer(SocketEventManager.getInstance().requestHandler(req));
-                ctx.write(resp);
+                //ctx.write(resp);
+                ctx.writeAndFlush(resp).addListener(new ChannelFutureListener() {
+                    @Override
+                    public void operationComplete(ChannelFuture channelFuture) throws Exception {
+                        if (channelFuture.isSuccess()) {
+                            System.out.println("写完了");
+                        } else {
+                            System.out.println("写失败了");
+                        }
+                    }
+                });
             }catch (Exception e)
             {
                 FileDemo.getInstance().Into("Socket错误:"+e+"时间:"+ Utils.getCurrentTime());
                 System.out.println("错误:"+e);
             }
-
 //        ByteBuf in = (ByteBuf) msg;
 //        try {
 //            while (in.isReadable()){
@@ -171,6 +184,7 @@ public class TdseSocketHandler extends ChannelInboundHandlerAdapter
 //            ReferenceCountUtil.release(msg);
 //        }
     }
+
 
 
 }

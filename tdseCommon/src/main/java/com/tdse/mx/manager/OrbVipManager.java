@@ -41,14 +41,13 @@ public class OrbVipManager
      */
     public String creatVipData(String msg)
     {
-        JSONObject ms = JsonUtils.getValue(msg);
         String viptype=null;
         int viptime=0;
         int vipprice=0;
         try {
-            viptype=ms.getString("viptype");
-            viptime=ms.getInt("viptime");
-            vipprice=ms.getInt("vipprice");
+            viptype=JsonUtils.getValue(msg,"viptype").toString();
+            viptime=Integer.parseInt(JsonUtils.getValue(msg,"viptime").toString());
+            vipprice=Integer.parseInt(JsonUtils.getValue(msg,"vipprice").toString());
 
         }catch (Exception e)
         {
@@ -71,15 +70,13 @@ public class OrbVipManager
      */
     public String updateVipData(String msg)
     {
-        JSONObject ms = JsonUtils.getValue(msg);
         String viptype=null;
         int viptime=0;
         int vipprice=0;
         try {
-            viptype=ms.getString("viptype");
-            viptime=ms.getInt("viptime");
-            vipprice=ms.getInt("vipprice");
-
+            viptype=JsonUtils.getValue(msg,"viptype").toString();
+            viptime=Integer.parseInt(JsonUtils.getValue(msg,"viptime").toString());
+            vipprice=Integer.parseInt(JsonUtils.getValue(msg,"vipprice").toString());
         }catch (Exception e)
         {
             return  JsonUtils.setResultData("false","Update Fail!").toString();
@@ -106,10 +103,9 @@ public class OrbVipManager
      */
     public String deleteVipData(String msg)
     {
-        JSONObject ms = JsonUtils.getValue(msg);
         String viptype=null;
         try {
-            viptype=ms.getString("viptype");
+            viptype=JsonUtils.getValue(msg,"viptype").toString();
         }catch (Exception e)
         {
             return  JsonUtils.setResultData("false","Delete Fail!").toString();
@@ -132,10 +128,9 @@ public class OrbVipManager
      */
     public String getVipData(String msg)
     {
-        JSONObject ms = JsonUtils.getValue(msg);
         String viptype=null;
         try {
-            viptype=ms.getString("viptype");
+            viptype=JsonUtils.getValue(msg,"viptype").toString();
         }catch (Exception e)
         {
             return  JsonUtils.setResultData("false","Get Fail!").toString();

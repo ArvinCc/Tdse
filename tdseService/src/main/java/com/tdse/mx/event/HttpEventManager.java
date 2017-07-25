@@ -41,7 +41,6 @@ public class HttpEventManager extends Event
     public byte[] postHandler(String msg)
     {
 
-
         return  postDistribute(msg);
     }
 

@@ -3,6 +3,7 @@ package com.tdse.mx.manager;
 import com.tdse.mx.dao.Product;
 import com.tdse.mx.db.ProductImpl;
 import com.tdse.mx.util.JsonUtils;
+import io.netty.util.internal.SystemPropertyUtil;
 import org.json.JSONObject;
 
 import java.io.File;
@@ -15,14 +16,17 @@ import java.util.List;
  */
 public class ProductManager
 {
-     private final String productWarehousePath="D:/Demo";
-     //private final String productWarehousePath="E:/Arvin/JAVA_PROJECT/ProductWarehouse/八大主题/测试安全";
+     private String productWarehousePath;
+     //private  String productWarehousePath="E:/Arvin/JAVA_PROJECT/ProductWarehouse/八大主题/测试安全";
 
 
     //使用volatile关键字保其可见性
     volatile private static ProductManager instance = null;
 
-    private ProductManager(){}
+    private ProductManager()
+    {
+        productWarehousePath= SystemPropertyUtil.get("user.dir")+"/DownLoad";
+    }
 
     public static ProductManager getInstance() {
         try {
@@ -42,16 +46,13 @@ public class ProductManager
         }
         return instance;
     }
-
-
     /**
      *   添加一个新产品
      * @param product 产品类
      * @return 是否成功添加
      */
-    public boolean add(Product product){
-
-
+    public boolean add(Product product)
+    {
         return  false;
     }
 

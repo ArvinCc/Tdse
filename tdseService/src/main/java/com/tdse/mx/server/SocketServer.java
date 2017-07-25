@@ -31,8 +31,8 @@ public class SocketServer extends Thread
             ServerBootstrap b = new ServerBootstrap();
             b.group(bossGroup, workerGroup)
                     .channel(NioServerSocketChannel.class)
-                    .childHandler(new ChannelInitializer<SocketChannel>() {
-
+                    .childHandler(new ChannelInitializer<SocketChannel>()
+                    {
                         @Override
                         protected void initChannel(SocketChannel ch) throws Exception {
                             ch.pipeline().addLast(new TdseSocketHandler());

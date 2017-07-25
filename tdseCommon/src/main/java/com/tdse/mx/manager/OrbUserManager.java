@@ -48,10 +48,9 @@ public class OrbUserManager
      */
     public String getUserData(String msg)
     {
-        JSONObject ms = JsonUtils.getValue(msg);
         String username=null;
         try {
-            username=ms.getString("username");
+            username=  JsonUtils.getValue(msg,"username").toString();
         }catch (Exception e)
         {
             return  JsonUtils.setResultData("false","Find Fail!").toString();

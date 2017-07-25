@@ -43,24 +43,16 @@ public class SocketEventManager extends Event
         String c = null;
         String msgContent=null;
         try {
-
             byte[] pkgId=new byte[6];
-
             byte[] contentLength =new byte[8];
-
             System.arraycopy(req,0,pkgId,0,6);
             System.arraycopy(req,6,contentLength,0,8);
-
             c = new String(contentLength,"UTF-8");
-
             int length= Integer.parseInt(c.trim());
             byte[] content =new byte[length];
-
             System.arraycopy(req,pkgId.length+contentLength.length,content,0,content.length);
-
             id =new String(pkgId,"UTF-8");
             msgContent =new String(content,"UTF-8");
-
             //FileDemo.getInstance().Into("客户端传过来的数据：数据包ID是"+id+"||内容是："+msgContent);
             System.out.println("客户端传过来的数据：数据包ID是"+id+"||内容是："+msgContent);
         } catch (UnsupportedEncodingException e) {

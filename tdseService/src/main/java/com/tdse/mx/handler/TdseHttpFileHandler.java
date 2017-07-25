@@ -183,14 +183,15 @@ public class TdseHttpFileHandler extends SimpleChannelInboundHandler<FullHttpReq
             return null;
         }
 
+        //发布后同级目录Download下载文件
+        return SystemPropertyUtil.get("user.dir")+"/DownLoad" + File.separator + uri;
 
-
-        String test =  SystemPropertyUtil.get("user.dir");
-        int one = test.lastIndexOf("\\");
+        //测试情况下的同级目录DownLoad下载文件
+        //String test =  SystemPropertyUtil.get("user.dir");
+        //int one = test.lastIndexOf("\\");
         //System.out.println(test.replace(test.substring((one+1),test.length()),"DownLoad"));
-        // Convert to absolute path.
-        //return SystemPropertyUtil.get("user.dir")+"/DownLoad" + File.separator + uri;
-        return test.replace(test.substring((one+1),test.length()),"DownLoad") + File.separator + uri;
+        //Convert to absolute path.
+       //return test.replace(test.substring((one+1),test.length()),"DownLoad") + File.separator + uri;
     }
 
     private static final Pattern ALLOWED_FILE_NAME = Pattern.compile("[^-\\._]?[^<>&\\\"]*");

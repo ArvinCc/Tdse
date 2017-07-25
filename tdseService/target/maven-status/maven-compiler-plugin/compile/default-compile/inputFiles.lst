@@ -1,11 +1,13 @@
+E:\Arvin\JAVA_PROJECT\Tdse\tdseService\src\main\java\com\tdse\mx\task\Task.java
+E:\Arvin\JAVA_PROJECT\Tdse\tdseService\src\main\java\com\tdse\mx\handler\TdseHttpInitializer.java
+E:\Arvin\JAVA_PROJECT\Tdse\tdseService\src\main\java\com\tdse\mx\handler\TdseSocketHandler.java
+E:\Arvin\JAVA_PROJECT\Tdse\tdseService\src\main\java\com\tdse\mx\server\HttpServer.java
 E:\Arvin\JAVA_PROJECT\Tdse\tdseService\src\main\java\com\tdse\mx\event\Event.java
 E:\Arvin\JAVA_PROJECT\Tdse\tdseService\src\main\java\com\tdse\mx\event\SocketEventManager.java
 E:\Arvin\JAVA_PROJECT\Tdse\tdseService\src\main\java\com\tdse\mx\server\TdseMain.java
 E:\Arvin\JAVA_PROJECT\Tdse\tdseService\src\main\java\com\tdse\mx\handler\TdseHttpFileHandler.java
 E:\Arvin\JAVA_PROJECT\Tdse\tdseService\src\main\java\com\tdse\mx\handler\TdseHttpHandler.java
 E:\Arvin\JAVA_PROJECT\Tdse\tdseService\src\main\java\com\tdse\mx\server\FileDemo.java
-E:\Arvin\JAVA_PROJECT\Tdse\tdseService\src\main\java\com\tdse\mx\handler\TdseHttpInitializer.java
 E:\Arvin\JAVA_PROJECT\Tdse\tdseService\src\main\java\com\tdse\mx\server\SocketServer.java
 E:\Arvin\JAVA_PROJECT\Tdse\tdseService\src\main\java\com\tdse\mx\event\HttpEventManager.java
-E:\Arvin\JAVA_PROJECT\Tdse\tdseService\src\main\java\com\tdse\mx\handler\TdseSocketHandler.java
-E:\Arvin\JAVA_PROJECT\Tdse\tdseService\src\main\java\com\tdse\mx\server\HttpServer.java
+E:\Arvin\JAVA_PROJECT\Tdse\tdseService\src\main\java\com\tdse\mx\task\TaskQueue.java
