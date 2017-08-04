@@ -39,7 +39,6 @@ public class TdseHttpFileHandler extends SimpleChannelInboundHandler<FullHttpReq
             sendError(ctx, BAD_REQUEST);
             return;
         }
-
         if (request.method() != GET)
         {
             ctx.fireChannelRead(request);
@@ -53,7 +52,6 @@ public class TdseHttpFileHandler extends SimpleChannelInboundHandler<FullHttpReq
             sendError(ctx, FORBIDDEN);
             return;
         }
-
         File file = new File(path);
         if (file.isHidden() || !file.exists()) {
             sendError(ctx, NOT_FOUND);
@@ -79,7 +77,6 @@ public class TdseHttpFileHandler extends SimpleChannelInboundHandler<FullHttpReq
         if (ifModifiedSince != null && !ifModifiedSince.isEmpty()) {
             SimpleDateFormat dateFormatter = new SimpleDateFormat(HTTP_DATE_FORMAT, Locale.US);
             Date ifModifiedSinceDate = dateFormatter.parse(ifModifiedSince);
-
             // Only compare up to the second because the datetime format we send to the client
             // does not have milliseconds
             long ifModifiedSinceDateSeconds = ifModifiedSinceDate.getTime() / 1000;

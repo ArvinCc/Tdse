@@ -10,14 +10,6 @@ import java.sql.Timestamp;
  */
 public class User {
 
-    /**
-     * mysql用户id
-     */
-    private long user_id;
-    /**
-     *  用户账户名
-     */
-    private String user_name;
 
     @Override
     public String toString() {
@@ -78,6 +70,14 @@ public class User {
       this.user_signup_time= user_signup_time;
     }
 
+    /**
+     * mysql用户id
+     */
+    private long user_id;
+    /**
+     *  用户账户名
+     */
+    private String user_name;
     /**
      * 用户密码
      */

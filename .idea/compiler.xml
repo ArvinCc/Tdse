@@ -12,7 +12,7 @@
       </profile>
     </annotationProcessing>
     <bytecodeTargetLevel>
-      <module name="tdseCommon" target="1.5" />
+      <module name="tdseCommon" target="1.8" />
       <module name="tdseDao" target="1.5" />
       <module name="tdseManager" target="1.5" />
       <module name="tdseProduct" target="1.5" />

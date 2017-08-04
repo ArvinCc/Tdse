@@ -20,7 +20,7 @@ public class Event
      */
     public   enum GetType
     {
-
+        GET_HEART_BEAT,
         GET_SIGN_IN,
         GET_SIGN_UP,
         GET_DATA_THEME,
@@ -54,7 +54,6 @@ public class Event
         }
     }
 
-
     /**
      * GET请求分发
      * @param msg
@@ -66,9 +65,11 @@ public class Event
 
             switch (getType){
                 case GET_SIGN_IN:
-                    return reResult("REQUEST_GET","GET_SIGN_IN", UserManager.getInstance().signIn(msg)).getBytes();
+                   // return reResult("REQUEST_GET","GET_SIGN_IN", UserManager.getInstance().signIn(msg)).getBytes();
+                    break;
                 case GET_SIGN_UP:
-                    return reResult("REQUEST_GET","GET_SIGN_UP",UserManager.getInstance().signUp(msg)).getBytes();
+                    //return reResult("REQUEST_GET","GET_SIGN_UP",UserManager.getInstance().signUp(msg)).getBytes();
+                    break;
                 case GET_DATA_USER:
                     System.out.println("客户端请求数据：GET_DATA_USER");
                     break;
@@ -125,6 +126,10 @@ public class Event
                         return OrbUserManager.getInstance().getUserVipSurplusTime(usernames).getBytes();
                     }
                     break;
+                case GET_HEART_BEAT:
+                    System.out.println("心跳");
+                    //return "mx".getBytes();
+                    break;
             }
         }catch (Exception e){
             System.out.println("GET请求错误"+e);
@@ -177,8 +182,6 @@ public class Event
         jsonObjects.add(jsonObject);
         jsonObjects.add(resultContent);
 
-        System.out.println("最终结果"+jsonObjects.toString());
-        FileDemo.getInstance().Into("最终结果:"+jsonObjects.toString()+"时间:"+ Utils.getCurrentTime());
         return  jsonObjects.toString();
     }
 }

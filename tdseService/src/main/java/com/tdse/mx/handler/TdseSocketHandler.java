@@ -156,7 +156,6 @@ public class TdseSocketHandler extends ChannelInboundHandlerAdapter
                 byte[] req = new byte[buf.readableBytes()];
                 buf.readBytes(req);
                 ByteBuf resp = Unpooled.copiedBuffer(SocketEventManager.getInstance().requestHandler(req));
-                //ctx.write(resp);
                 ctx.writeAndFlush(resp).addListener(new ChannelFutureListener() {
                     @Override
                     public void operationComplete(ChannelFuture channelFuture) throws Exception {

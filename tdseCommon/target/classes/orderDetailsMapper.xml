@@ -4,33 +4,95 @@
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="orderDetailsMapper">
 
-    <select id="findById" parameterType="long" resultType="com.tdse.mx.dao.OrderDetails">
+    <!--获得所有  -->
+    <select id="findAll"  resultType="com.tdse.mx.dao.OrderDetails">
         select * from tdse_order_details
     </select>
 
-    <select id="findOrderDetailsById" parameterType="long" resultType="com.tdse.mx.dao.OrderDetails">
-        select * from tdse_order_details where
-        details_id =#{details_id}
+    <!--获得条件筛选后  -->
+    <select id="find"  resultType="com.tdse.mx.dao.OrderDetails">
+        select * from tdse_order_details
+        <where>
+            <if test="details_id!=0">
+                and details_id =#{details_id}
+            </if>
+            <if test="details_name!=null">
+                and  details_name = #{details_name}
+            </if>
+            <if test="details_order_id!=null">
+                and  details_order_id = #{details_order_id}
+            </if>
+            <if test="details_money!=null">
+                and  details_money = #{details_money}
+            </if>
+            <if test="details_start_time!=null">
+                and  details_start_time = #{details_start_time}
+            </if>
+            <if test="details_end_time!=null">
+                and  details_end_time = #{details_end_time}
+            </if>
+            <if test="details_user_id!=null">
+                and  details_user_id = #{details_user_id}
+            </if>
+        </where>
     </select>
 
-    <select id="findByOrderId" parameterType="long" resultType="com.tdse.mx.dao.OrderDetails">
-        select * from tdse_order_details where
-        details_order_id =#{details_order_id}
-    </select>
-
-    <insert id="addOrderDetails" parameterType="com.tdse.mx.dao.OrderDetails">
+    <insert id="add" parameterType="com.tdse.mx.dao.OrderDetails">
         insert into tdse_order_details(details_id,details_name,details_order_id,details_money,details_start_time,details_end_time,details_user_id)
         values(#{details_id},#{details_name},#{details_order_id},#{details_money},#{details_start_time},#{details_end_time},#{details_user_id})
     </insert>
 
-    <delete id="deleteById" parameterType="long">
-        delete from tdse_order_details where
-        details_id=#{details_id}
+    <insert id="addList" parameterType="java.util.List">
+        insert into tdse_order_details(details_id,details_name,details_order_id,details_money,details_start_time,details_end_time,details_user_id)
+        values
+        <foreach collection="list" item="item"  index="index" separator=",">
+            (#{item.details_id},#{item.details_name},#{item.details_order_id},#{item.details_money},#{item.details_start_time},#{item.details_end_time},#{details_user_id})
+        </foreach>
+    </insert>
+
+    <delete id="deleteAll" >
+        delete from tdse_order_details
     </delete>
 
-    <update id="updateOrderDetails" parameterType="com.tdse.mx.dao.OrderDetails">
+    <delete id="delete" parameterType="com.tdse.mx.dao.OrderDetails">
+        delete from tdse_order_details
+        <where>
+            <if test="details_id!=0">
+                and details_id =#{details_id}
+            </if>
+            <if test="details_name!=null">
+                and  details_name = #{details_name}
+            </if>
+            <if test="details_order_id!=null">
+                and  details_order_id = #{details_order_id}
+            </if>
+            <if test="details_money!=null">
+                and  details_money = #{details_money}
+            </if>
+            <if test="details_start_time!=null">
+                and  details_start_time = #{details_start_time}
+            </if>
+            <if test="details_end_time!=null">
+                and  details_end_time = #{details_end_time}
+            </if>
+            <if test="details_user_id!=null">
+                and  details_user_id = #{details_user_id}
+            </if>
+        </where>
+    </delete>
+
+    <update id="update" parameterType="com.tdse.mx.dao.OrderDetails">
         update tdse_order_details set details_name=#{details_name},details_order_id=#{details_order_id},details_money=#{details_money},details_start_time=#{details_start_time},details_end_time=#{details_end_time},details_user_id=#{details_user_id}
         where details_id=#{details_id}
     </update>
 
+    <update id="updateList" parameterType="java.util.List">
+        <foreach collection="list" item="item" index="index" open="" close="" separator=";">
+            update tdse_order_details
+            <set>
+                details_name=#{item.details_name},details_order_id=#{item.details_order_id},details_money=#{item.details_money},details_start_time=#{item.details_start_time},details_end_time=#{item.details_end_time},details_user_id=#{item.details_user_id}
+            </set>
+            where details_id = #{item.details_id}
+        </foreach>
+    </update>
 </mapper>

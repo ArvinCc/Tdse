@@ -6,6 +6,8 @@ import com.tdse.mx.db.OrbVipImpl;
 import com.tdse.mx.util.JsonUtils;
 import org.json.JSONObject;
 
+import java.util.List;
+
 /**
  * Created by Administrator on 2017/7/20.
  */
@@ -58,7 +60,7 @@ public class OrbVipManager
         orbbecVip.setVip_type(viptype);
         orbbecVip.setVip_time(viptime);
         orbbecVip.setVip_price(vipprice);
-        OrbVipImpl.getInstance().addOrbbecVip(orbbecVip);
+        OrbVipImpl.getInstance().add(orbbecVip);
 
         return  JsonUtils.setResultData("true","Creat Success!").toString();
     }
@@ -70,28 +72,31 @@ public class OrbVipManager
      */
     public String updateVipData(String msg)
     {
-        String viptype=null;
-        int viptime=0;
-        int vipprice=0;
-        try {
-            viptype=JsonUtils.getValue(msg,"viptype").toString();
-            viptime=Integer.parseInt(JsonUtils.getValue(msg,"viptime").toString());
-            vipprice=Integer.parseInt(JsonUtils.getValue(msg,"vipprice").toString());
-        }catch (Exception e)
-        {
-            return  JsonUtils.setResultData("false","Update Fail!").toString();
-        }
-        OrbVip orbbecVip= OrbVipImpl.getInstance().findByType("");
-        if (orbbecVip!=null)
-        {
-            OrbVip orbbecVips =new OrbVip();
-            orbbecVips.setVip_id(orbbecVip.getVip_id());
-            orbbecVips.setVip_type(viptype);
-            orbbecVips.setVip_time(viptime);
-            orbbecVips.setVip_price(vipprice);
-            OrbVipImpl.getInstance().updateOrbbecVip(orbbecVips);
-            return  JsonUtils.setResultData("true","Update Success!").toString();
-        }
+//        String viptype=null;
+//        int viptime=0;
+//        int vipprice=0;
+//        try {
+//            viptype=JsonUtils.getValue(msg,"viptype").toString();
+//            viptime=Integer.parseInt(JsonUtils.getValue(msg,"viptime").toString());
+//            vipprice=Integer.parseInt(JsonUtils.getValue(msg,"vipprice").toString());
+//        }catch (Exception e)
+//        {
+//            return  JsonUtils.setResultData("false","Update Fail!").toString();
+//        }
+//
+//        OrbVip orbbecVip= OrbVipImpl.getInstance().findByType("");
+//
+//        if (orbbecVip!=null)
+//        {
+//            OrbVip orbbecVips =new OrbVip();
+//            orbbecVips.setVip_id(orbbecVip.getVip_id());
+//            orbbecVips.setVip_type(viptype);
+//            orbbecVips.setVip_time(viptime);
+//            orbbecVips.setVip_price(vipprice);
+//            OrbVipImpl.getInstance().update(orbbecVips);
+//            return  JsonUtils.setResultData("true","Update Success!").toString();
+
+        //}
 
         return  JsonUtils.setResultData("false","Update Fail!").toString();
     }
@@ -103,20 +108,20 @@ public class OrbVipManager
      */
     public String deleteVipData(String msg)
     {
-        String viptype=null;
-        try {
-            viptype=JsonUtils.getValue(msg,"viptype").toString();
-        }catch (Exception e)
-        {
-            return  JsonUtils.setResultData("false","Delete Fail!").toString();
-        }
-
-        OrbVip orbbecVip= OrbVipImpl.getInstance().findByType("");
-        if (orbbecVip!=null)
-        {
-            OrbVipImpl.getInstance().deleteById(orbbecVip.getVip_id());
-            return  JsonUtils.setResultData("true","Delete Success!").toString();
-        }
+//        String viptype=null;
+//        try {
+//            viptype=JsonUtils.getValue(msg,"viptype").toString();
+//        }catch (Exception e)
+//        {
+//            return  JsonUtils.setResultData("false","Delete Fail!").toString();
+//        }
+//
+//        OrbVip orbbecVip= OrbVipImpl.getInstance().findByType("");
+//        if (orbbecVip!=null)
+//        {
+//            OrbVipImpl.getInstance().deleteById(orbbecVip.getVip_id());
+//            return  JsonUtils.setResultData("true","Delete Success!").toString();
+//        }
         return  JsonUtils.setResultData("false","Delete Fail!").toString();
     }
 
@@ -140,7 +145,16 @@ public class OrbVipManager
         {
             return JSON.toJSONString(OrbVipImpl.getInstance().find());
         }else {
-            return JSON.toJSONString(OrbVipImpl.getInstance().findByType(viptype));
+
+           OrbVip o =new OrbVip();
+           o.setVip_type(viptype);
+           List<OrbVip> oo= OrbVipImpl.getInstance().find(o);
+
+           if(oo.size()>0){
+               return JSON.toJSONString(oo.get(0));
+           }else{
+               return JSON.toJSONString(null);
+           }
         }
     }
 }

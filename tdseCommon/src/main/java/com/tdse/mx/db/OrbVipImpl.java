@@ -1,38 +1,19 @@
 package com.tdse.mx.db;
 
 import com.tdse.mx.dao.OrbVip;
-import com.tdse.mx.intf.IOrbbecVip;
-import org.apache.ibatis.io.Resources;
-import org.apache.ibatis.session.SqlSession;
-import org.apache.ibatis.session.SqlSessionFactory;
-import org.apache.ibatis.session.SqlSessionFactoryBuilder;
-
-import java.io.IOException;
-import java.io.Reader;
-import java.util.List;
 
 /**
  * Created by Administrator on 2017/7/17.
  */
-public class OrbVipImpl implements IOrbbecVip
+public class OrbVipImpl extends Impl<OrbVip>
 {
-
-    private SqlSessionFactory sessionFactory;
-    private SqlSession session;
 
     //使用volatile关键字保其可见性
     volatile private static OrbVipImpl instance = null;
 
 
     public OrbVipImpl() {
-        String resource = "mybatisconf.xml";
-        try {
-            Reader reader = Resources.getResourceAsReader(resource);
-            sessionFactory = new SqlSessionFactoryBuilder().build(reader);
-            session = sessionFactory.openSession();
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
+      mapperName="orbbecVipMapper";
     }
 
     public static OrbVipImpl getInstance() {
@@ -54,46 +35,4 @@ public class OrbVipImpl implements IOrbbecVip
         return instance;
     }
 
-
-    public OrbVip findById(int id) {
-        String statement = "orbbecVipMapper.findById";
-        OrbVip orderDetails = session.selectOne(statement,id);
-        session.commit();
-        return orderDetails;
-    }
-
-    public OrbVip findByType(String type) {
-        String statement = "orbbecVipMapper.findByType";
-        OrbVip orderDetails = session.selectOne(statement,type);
-        session.commit();
-        return orderDetails;
-    }
-
-    public List<OrbVip> find() {
-        String statement = "orbbecVipMapper.find";
-        List<OrbVip> orderDetails = session.selectList(statement);
-        session.commit();
-        return orderDetails;
-    }
-
-    public void deleteById(int id)
-    {
-        String statement = "orbbecVipMapper.deleteById";
-        session.delete(statement, id);
-        session.commit();
-    }
-
-    public void addOrbbecVip(OrbVip order)
-    {
-        String statement="orbbecVipMapper.addOrbbecVip";
-        session.insert(statement,order);
-        session.commit();
-    }
-
-    public void updateOrbbecVip(OrbVip order)
-    {
-        String statement="orbbecVipMapper.updateOrbbecVip";
-        session.update(statement,order);
-        session.commit();
-    }
 }

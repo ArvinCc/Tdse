@@ -40,50 +40,50 @@ public class UserManager {
      * @param msg 信息
      * @return 是否成功
      */
-   public JSONObject signUp(String msg)
-   {
-       JSONObject ms = JsonUtils.getValue(msg);
-       User user=new User();
-       user.setName(ms.getString("name"));
-       user.setPassword(ms.getString("password"));
-       user.setPhoneNumber(ms.getString("phoneNumber"));
+//   public JSONObject signUp(String msg)
+//   {
+//       JSONObject ms = JsonUtils.getValue(msg);
+//       User user=new User();
+//       user.setName(ms.getString("name"));
+//       user.setPassword(ms.getString("password"));
+//       user.setPhoneNumber(ms.getString("phoneNumber"));
+//
+//       if (UserImpl.getInstance().finByName(user.getName())){
+//           return  JsonUtils.setResultData("false","注册失败!账户已存在!");
+//       }
+//
+//       if (UserImpl.getInstance().findByPhone(Long.valueOf(user.getPhoneNumber()).longValue()))
+//       {
+//           return  JsonUtils.setResultData("false","注册失败!电话已经被注册");
+//       }
+//
+//       user.setRegisterTime(Utils.getCurrentTime());
+//
+//       UserImpl.getInstance().addUser(user);
+//       return  JsonUtils.setResultData("true","恭喜"+user.getName()+"注册成功!");
+//   }
 
-       if (UserImpl.getInstance().finByName(user.getName())){
-           return  JsonUtils.setResultData("false","注册失败!账户已存在!");
-       }
-
-       if (UserImpl.getInstance().findByPhone(Long.valueOf(user.getPhoneNumber()).longValue()))
-       {
-           return  JsonUtils.setResultData("false","注册失败!电话已经被注册");
-       }
-
-       user.setRegisterTime(Utils.getCurrentTime());
-
-       UserImpl.getInstance().addUser(user);
-       return  JsonUtils.setResultData("true","恭喜"+user.getName()+"注册成功!");
-   }
-
-   public JSONObject signIn(String msg)
-   {
-       JSONObject ms = JsonUtils.getValue(msg);
-
-       User user=UserImpl.getInstance().finUserByName(ms.getString("name"));
-       if(user==null)
-       {
-           user=UserImpl.getInstance().findUserByPhone(Long.valueOf(ms.getString("phoneNumber")).longValue());
-           if (user==null){
-               return JsonUtils.setResultData("false","登陆失败!账号用户名错误!");
-           }
-       }
-
-       JSONObject jsonObject =new JSONObject();
-       jsonObject.put("name",user.getName());
-       jsonObject.put("password",user.getPassword());
-       jsonObject.put("phoneNumber",user.getPhoneNumber());
-       jsonObject.put("signUpTime",user.getRegisterTime());
-
-       return JsonUtils.setResultData("true",jsonObject);
-   }
+//   public JSONObject signIn(String msg)
+//   {
+//       JSONObject ms = JsonUtils.getValue(msg);
+//
+//       User user=UserImpl.getInstance().finUserByName(ms.getString("name"));
+//       if(user==null)
+//       {
+//           user=UserImpl.getInstance().findUserByPhone(Long.valueOf(ms.getString("phoneNumber")).longValue());
+//           if (user==null){
+//               return JsonUtils.setResultData("false","登陆失败!账号用户名错误!");
+//           }
+//       }
+//
+//       JSONObject jsonObject =new JSONObject();
+//       jsonObject.put("name",user.getName());
+//       jsonObject.put("password",user.getPassword());
+//       jsonObject.put("phoneNumber",user.getPhoneNumber());
+//       jsonObject.put("signUpTime",user.getRegisterTime());
+//
+//       return JsonUtils.setResultData("true",jsonObject);
+//   }
 
 
 

@@ -4,32 +4,130 @@
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="orbbecOrderMapper">
 
-    <select id="findById" parameterType="String" resultType="com.tdse.mx.dao.OrbOrder">
-        select * from tdse_orbbec_order where
-        order_id =#{order_id}
-    </select>
-
-    <select id="find" resultType="com.tdse.mx.dao.OrbOrder">
+    <!--获得所有  -->
+    <select id="findAll"  resultType="com.tdse.mx.dao.OrbOrder">
         select * from tdse_orbbec_order
     </select>
 
-    <select id="findByUserName" parameterType="String" resultType="com.tdse.mx.dao.OrbOrder">
-        select * from tdse_orbbec_order where
-        order_user_name =#{order_user_name}
+    <!--获得条件筛选后  -->
+    <select id="find"  resultType="com.tdse.mx.dao.OrbOrder">
+        select * from tdse_orbbec_order
+        <where>
+            <if test="order_id!=null">
+                and order_id =#{order_id}
+            </if>
+            <if test="order_user_name!=null">
+                and  order_user_name = #{order_user_name}
+            </if>
+            <if test="order_payment_user_name!=null">
+                and  order_payment_user_name = #{order_payment_user_name}
+            </if>
+            <if test="order_establish_time!=null">
+                and  order_establish_time = #{order_establish_time}
+            </if>
+            <if test="order_deal_time!=null">
+                and  order_deal_time = #{order_deal_time}
+            </if>
+            <if test="order_appid!=null">
+                and  order_appid = #{order_appid}
+            </if>
+            <if test="order_goods_id!=null">
+                and  order_goods_id = #{order_goods_id}
+            </if>
+            <if test="order_fee_type!=null">
+                and  order_fee_type = #{order_fee_type}
+            </if>
+            <if test="order_uint_price!=null">
+                and  order_uint_price = #{order_uint_price}
+            </if>
+            <if test="order_count!=null">
+                and  order_count = #{order_count}
+            </if>
+            <if test="order_total_fee!=null">
+                and  order_total_fee = #{order_total_fee}
+            </if>
+            <if test="order_orb_order!=null">
+                and  order_orb_order = #{order_orb_order}
+            </if>
+            <if test="order_sign!=null">
+                and  order_sign = #{order_sign}
+            </if>
+        </where>
     </select>
 
-    <insert id="addOrbbecOrder" parameterType="com.tdse.mx.dao.OrbOrder">
+    <insert id="add" parameterType="com.tdse.mx.dao.OrbOrder">
         insert into tdse_orbbec_order(order_id,order_user_name,order_payment_user_name,order_establish_time,order_deal_time,order_appid,order_goods_id,order_fee_type,order_uint_price,order_count,order_total_fee,order_orb_order,order_sign) values (#{order_id},#{order_user_name},#{order_payment_user_name},#{order_establish_time},#{order_deal_time},#{order_appid},#{order_goods_id},#{order_fee_type},#{order_uint_price},#{order_count},#{order_total_fee},#{order_orb_order},#{order_sign})
     </insert>
 
-    <delete id="deleteById" parameterType="String">
-        delete from tdse_orbbec_order where
-        order_id=#{order_id}
+    <insert id="addList" parameterType="java.util.List">
+        insert into tdse_orbbec_order(order_id,order_user_name,order_payment_user_name,order_establish_time,order_deal_time,order_appid,order_goods_id,order_fee_type,order_uint_price,order_count,order_total_fee,order_orb_order,order_sign)
+        values
+        <foreach collection="list" item="item"  index="index" separator=",">
+            (#{item.order_id},#{item.order_user_name},#{item.order_payment_user_name},#{item.order_establish_time},#{item.order_deal_time},#{item.order_appid},#{item.order_goods_id},#{item.order_fee_type},#{item.order_uint_price},#{item.order_count},#{item.order_total_fee},#{item.order_orb_order},#{item.order_sign})
+        </foreach>
+    </insert>
+
+    <delete id="deleteAll" >
+        delete from tdse_orbbec_order
     </delete>
 
-    <update id="updateOrbbecOrder" parameterType="com.tdse.mx.dao.OrbOrder">
+    <delete id="delete" parameterType="com.tdse.mx.dao.OrbOrder">
+        delete from tdse_orbbec_order
+        <where>
+            <if test="order_id!=null">
+                and order_id =#{order_id}
+            </if>
+            <if test="order_user_name!=null">
+                and  order_user_name = #{order_user_name}
+            </if>
+            <if test="order_payment_user_name!=null">
+                and  order_payment_user_name = #{order_payment_user_name}
+            </if>
+            <if test="order_establish_time!=null">
+                and  order_establish_time = #{order_establish_time}
+            </if>
+            <if test="order_deal_time!=null">
+                and  order_deal_time = #{order_deal_time}
+            </if>
+            <if test="order_appid!=null">
+                and  order_appid = #{order_appid}
+            </if>
+            <if test="order_goods_id!=null">
+                and  order_goods_id = #{order_goods_id}
+            </if>
+            <if test="order_fee_type!=null">
+                and  order_fee_type = #{order_fee_type}
+            </if>
+            <if test="order_uint_price!=null">
+                and  order_uint_price = #{order_uint_price}
+            </if>
+            <if test="order_count!=null">
+                and  order_count = #{order_count}
+            </if>
+            <if test="order_total_fee!=null">
+                and  order_total_fee = #{order_total_fee}
+            </if>
+            <if test="order_orb_order!=null">
+                and  order_orb_order = #{order_orb_order}
+            </if>
+            <if test="order_sign!=null">
+                and  order_sign = #{order_sign}
+            </if>
+        </where>
+    </delete>
+
+    <update id="update" parameterType="com.tdse.mx.dao.OrbOrder">
         update tdse_orbbec_order set order_user_name=#{order_user_name},order_payment_user_name=#{order_payment_user_name},order_establish_time=#{order_establish_time},order_deal_time=#{order_deal_time},order_appid=#{order_appid},order_goods_id=#{order_goods_id},order_fee_type=#{order_fee_type},order_uint_price=#{order_uint_price},order_count=#{order_count},order_total_fee=#{order_total_fee},order_orb_order=#{order_orb_order},order_sign=#{order_sign}
         where order_id=#{order_id}
     </update>
 
+    <update id="updateList" parameterType="java.util.List">
+        <foreach collection="list" item="item" index="index" open="" close="" separator=";">
+            update tdse_orbbec_order
+            <set>
+                order_user_name=#{item.order_user_name},order_payment_user_name=#{item.order_payment_user_name},order_establish_time=#{item.order_establish_time},order_deal_time=#{item.order_deal_time},order_appid=#{item.order_appid},order_goods_id=#{item.order_goods_id},order_fee_type=#{item.order_fee_type},order_uint_price=#{item.order_uint_price},order_count=#{item.order_count},order_total_fee=#{item.order_total_fee},order_orb_order=#{item.order_orb_order},order_sign=#{item.order_sign}
+            </set>
+            where order_id = #{item.order_id}
+        </foreach>
+    </update>
 </mapper>

@@ -30,5 +30,4 @@ public class TdseHttpInitializer extends ChannelInitializer<SocketChannel>
         pipeline.addLast(new TdseHttpFileHandler());
         pipeline.addLast(new TdseHttpHandler());
     }
-
 }

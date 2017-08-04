@@ -10,6 +10,7 @@ import com.tdse.mx.util.Utils;
 import org.json.JSONObject;
 
 import java.sql.Timestamp;
+import java.util.List;
 
 
 /**
@@ -56,9 +57,16 @@ public class OrbUserManager
             return  JsonUtils.setResultData("false","Find Fail!").toString();
         }
 
-        return   JSON.toJSONString(OrbUserImpl.getInstance().findByName(username));
-    }
+        OrbUser o=new OrbUser();
+        o.setUser_name(username);
+        List<OrbUser> orders =OrbUserImpl.getInstance().find(o);
 
+        if(orders.size()>0){
+            return   JSON.toJSONString(orders.get(0));
+        }else {
+            return   JSON.toJSONString(null);
+        }
+    }
 
     /**
      * 获得vip时间
@@ -67,11 +75,15 @@ public class OrbUserManager
      */
     public String getUserVipTime(String username)
     {
-         OrbUser orbUser = OrbUserImpl.getInstance().findByName(username);
-         if (orbUser!=null) {
+        OrbUser o=new OrbUser();
+        o.setUser_name(username);
+        List<OrbUser> orders =OrbUserImpl.getInstance().find(o);
+        // OrbUser orbUser = OrbUserImpl.getInstance().findByName(username);
+
+         if (orders.size()>0) {
              JSONObject jsonObject = new JSONObject();
              jsonObject.put("result", true);
-             jsonObject.put("viptime", "" + orbUser.getUser_vip_time());
+             jsonObject.put("viptime", "" + orders.get(0).getUser_vip_time());
              return jsonObject.toString();
          }
         return  JsonUtils.setResultData("false","Find Fail!").toString();
@@ -79,19 +91,19 @@ public class OrbUserManager
 
     public String getUserVipSurplusTime(String username)
     {
-
-            OrbUser orbUser = OrbUserImpl.getInstance().findByName(username);
-            if (orbUser!=null)
+        OrbUser o=new OrbUser();
+        o.setUser_name(username);
+        List<OrbUser> orders =OrbUserImpl.getInstance().find(o);
+           // OrbUser orbUser = OrbUserImpl.getInstance().findByName(username);
+            if (orders.size()>0)
             {
                 JSONObject jsonObject =new JSONObject();
                 jsonObject.put("result",true);
-                jsonObject.put("viptime",""+(orbUser.getUser_vip_time().getTime() - Utils.getCurrentTime().getTime())/(1000*60));
+                jsonObject.put("viptime",""+(orders.get(0).getUser_vip_time().getTime() - Utils.getCurrentTime().getTime())/(1000*60));
                 return  jsonObject.toString();
             }
         return  JsonUtils.setResultData("false","Find Fail!").toString();
     }
-
-
 
     /**
      * 用户加vip时间
@@ -101,21 +113,29 @@ public class OrbUserManager
     public void setUserNewVipTime(String username,int vipId)
     {
         try{
-            OrbUser orbUser = OrbUserImpl.getInstance().findByName(username);
+            OrbUser o=new OrbUser();
+            o.setUser_name(username);
+            List<OrbUser> orders =OrbUserImpl.getInstance().find(o);
 
-            if(orbUser !=null)
+           // OrbUser orbUser = OrbUserImpl.getInstance().findByName(username);
+
+            if(orders.size()>0)
             {
-                Timestamp timestamp = orbUser.getUser_vip_time();
-                OrbVip orbbecVip = OrbVipImpl.getInstance().findById(vipId);
-                if(timestamp!=null&&orbbecVip!=null)
+                Timestamp timestamp = orders.get(0).getUser_vip_time();
+
+                 OrbVip oo=new OrbVip();
+                 oo.setVip_id(vipId);
+                 List<OrbVip> orbbecVip = OrbVipImpl.getInstance().find(oo);
+
+                if(timestamp!=null&&orbbecVip.size()>0)
                 {
-                  Timestamp timestamp1 = Utils.getAddTime(timestamp,orbbecVip.getVip_time());
-                  orbUser.setUser_vip_time(timestamp1);
-                  OrbUserImpl.getInstance().updateOrbbecUser(orbUser);
+                  Timestamp timestamp1 = Utils.getAddTime(timestamp,orbbecVip.get(0).getVip_time());
+                    orders.get(0).setUser_vip_time(timestamp1);
+                  OrbUserImpl.getInstance().update(orders.get(0));
                 }else {
-                    Timestamp timestamp1 = Utils.getAddTime(Utils.getCurrentTime(),orbbecVip.getVip_time());
-                    orbUser.setUser_vip_time(timestamp1);
-                    OrbUserImpl.getInstance().updateOrbbecUser(orbUser);
+                    Timestamp timestamp1 = Utils.getAddTime(Utils.getCurrentTime(),orbbecVip.get(0).getVip_time());
+                    orders.get(0).setUser_vip_time(timestamp1);
+                    OrbUserImpl.getInstance().update(orders.get(0));
                 }
             }
         }catch (Exception e)

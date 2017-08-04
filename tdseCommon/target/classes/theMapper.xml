@@ -4,45 +4,76 @@
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="theMapper">
 
-    <select id="find"  resultType="com.tdse.mx.dao.Product">
+    <!--获得所有  -->
+    <select id="findAll"  resultType="com.tdse.mx.dao.Theme">
         select * from tdse_product_theme
     </select>
 
-    <select id="findThemeById" parameterType="String" resultType="com.tdse.mx.dao.Theme">
-        select * from tdse_product_theme where
-        theme_id =#{theme_id}
+    <!--获得条件筛选后  -->
+    <select id="find"  resultType="com.tdse.mx.dao.Theme">
+        select * from tdse_product_theme
+        <where>
+            <if test="theme_id!=0">
+                and theme_id =#{theme_id}
+            </if>
+            <if test="theme_name!=null">
+                and  theme_name = #{theme_name}
+            </if>
+            <if test="theme_money!=null">
+                and  theme_money = #{theme_money}
+            </if>
+            <if test="user_phone_number!=null">
+                and  theme_introduce = #{theme_introduce}
+            </if>
+        </where>
     </select>
 
-    <select id="findThemeByName" parameterType="String" resultType="com.tdse.mx.dao.Theme">
-        select * from tdse_product_theme where
-        theme_name = #{theme_name}
-    </select>
-
-    <select id="findById" parameterType="String" resultType="boolean">
-        select 1 from tdse_product_theme where theme_id =#{theme_id} limit 1
-    </select>
-
-    <select id="findByName" parameterType="String" resultType="boolean">
-        select 1 from tdse_product_theme where theme_name =#{theme_name} limit 1
-    </select>
-
-    <insert id="addTheme" parameterType="com.tdse.mx.dao.Theme">
+    <insert id="add" parameterType="com.tdse.mx.dao.Theme">
         insert into tdse_product_theme(theme_id,theme_name,theme_money,theme_introduce) values (#{theme_id},#{theme_name},#{theme_money},#{theme_introduce})
     </insert>
 
-    <delete id="deleteById" parameterType="String">
-        delete from tdse_product_theme where
-        theme_id=#{theme_id}
+    <insert id="addList" parameterType="java.util.List">
+        insert into tdse_product_theme(theme_id,theme_name,theme_money,theme_introduce)
+        values
+        <foreach collection="list" item="item"  index="index" separator=",">
+            (#{item.theme_id},#{item.theme_name},#{item.theme_money},#{item.theme_introduce})
+        </foreach>
+    </insert>
+
+    <delete id="deleteAll" >
+        delete from tdse_product_theme
     </delete>
 
-    <delete id="deleteByName" parameterType="String">
-        delete from tdse_product_theme where
-        theme_name=#{theme_name}
+    <delete id="delete" parameterType="com.tdse.mx.dao.Theme">
+        delete from tdse_product_theme
+        <where>
+            <if test="theme_id!=0">
+                and theme_id =#{theme_id}
+            </if>
+            <if test="theme_name!=null">
+                and  theme_name = #{theme_name}
+            </if>
+            <if test="theme_money!=null">
+                and  theme_money = #{theme_money}
+            </if>
+            <if test="theme_introduce!=null">
+                and  theme_introduce = #{theme_introduce}
+            </if>
+        </where>
     </delete>
 
-    <update id="updateTheme" parameterType="com.tdse.mx.dao.Theme">
+    <update id="update" parameterType="com.tdse.mx.dao.Theme">
         update tdse_product_theme set theme_name=#{theme_name},theme_money=#{theme_money},theme_introduce=#{theme_introduce}
         where theme_id=#{theme_id}
     </update>
 
+    <update id="updateList" parameterType="java.util.List">
+        <foreach collection="list" item="item" index="index" open="" close="" separator=";">
+            update tdse_product_theme
+            <set>
+                theme_name = #{item.theme_name},theme_money = #{item.theme_money},theme_introduce = #{item.theme_introduce}
+            </set>
+            where theme_id = #{item.theme_id}
+        </foreach>
+    </update>
 </mapper>

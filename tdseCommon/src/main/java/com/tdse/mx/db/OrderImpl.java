@@ -1,37 +1,21 @@
 package com.tdse.mx.db;
 
 import com.tdse.mx.dao.Order;
-import com.tdse.mx.dao.Theme;
-import com.tdse.mx.intf.IOrder;
-import org.apache.ibatis.io.Resources;
-import org.apache.ibatis.session.SqlSession;
-import org.apache.ibatis.session.SqlSessionFactory;
-import org.apache.ibatis.session.SqlSessionFactoryBuilder;
+import com.tdse.mx.intf.IOperation;
 
-import java.io.IOException;
-import java.io.Reader;
 import java.util.List;
 
 /**
  * Created by Administrator on 2017/6/14.
  */
-public class OrderImpl implements IOrder {
-
-    private SqlSessionFactory sessionFactory;
-    private SqlSession session;
-
+public class OrderImpl extends Impl<Order>
+{
     //使用volatile关键字保其可见性
     volatile private static OrderImpl instance = null;
 
-    public OrderImpl() {
-        String resource = "mybatisconf.xml";
-        try {
-            Reader reader = Resources.getResourceAsReader(resource);
-            sessionFactory = new SqlSessionFactoryBuilder().build(reader);
-            session = sessionFactory.openSession();
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
+    public OrderImpl()
+    {
+      mapperName="orderMapper";
     }
 
     public static OrderImpl getInstance() {
@@ -53,36 +37,4 @@ public class OrderImpl implements IOrder {
         return instance;
     }
 
-
-    public Order findOrderById(long id) {
-        String statement = "orderMapper.findOrderById";
-        Order order = session.selectOne(statement,id);
-        session.commit();
-        return order;
-    }
-
-    public List<Order> findOrderByUserId(long id) {
-        String statement = "orderMapper.findOrderByUserId";
-        List<Order> orders = session.selectList(statement,id);
-        session.commit();
-        return orders;
-    }
-
-    public void deleteById(long id) {
-        String statement = "orderMapper.deleteById";
-        session.delete(statement, id);
-        session.commit();
-    }
-
-    public void addOrder(Order order) {
-        String statement = "orderMapper.addOrder";
-        session.insert(statement, order);
-        session.commit();
-    }
-
-    public void updateOrder(Order order) {
-        String statement = "orderMapper.updateOrder";
-        session.update(statement,order);
-        session.commit();
-    }
 }

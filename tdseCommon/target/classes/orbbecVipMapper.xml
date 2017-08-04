@@ -4,33 +4,76 @@
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="orbbecVipMapper">
 
-    <select id="findById" parameterType="int" resultType="com.tdse.mx.dao.OrbVip">
-        select * from tdse_orbbec_vip where
-        vip_id =#{vip_id}
-    </select>
-
-    <select id="findByType" parameterType="String" resultType="com.tdse.mx.dao.OrbVip">
-        select * from tdse_orbbec_vip where
-        vip_type =#{vip_type}
-    </select>
-
-    <select id="find" resultType="com.tdse.mx.dao.OrbVip">
+    <!--获得所有  -->
+    <select id="findAll"  resultType="com.tdse.mx.dao.OrbVip">
         select * from tdse_orbbec_vip
     </select>
 
+    <!--获得条件筛选后  -->
+    <select id="find"  resultType="com.tdse.mx.dao.OrbVip">
+        select * from tdse_user
+        <where>
+            <if test="vip_id!=0">
+                and vip_id =#{vip_id}
+            </if>
+            <if test="vip_type!=null">
+                and  vip_type = #{vip_type}
+            </if>
+            <if test="vip_time!=null">
+                and  vip_time = #{vip_time}
+            </if>
+            <if test="vip_price!=null">
+                and  vip_price = #{vip_price}
+            </if>
+        </where>
+    </select>
 
-    <insert id="addOrbbecVip" parameterType="com.tdse.mx.dao.OrbVip">
+    <insert id="add" parameterType="com.tdse.mx.dao.OrbVip">
         insert into tdse_orbbec_vip(vip_id,vip_type,vip_time,vip_price) values (#{vip_id},#{vip_type},#{vip_time},#{vip_price})
     </insert>
 
-    <delete id="deleteById" parameterType="int">
-        delete from tdse_orbbec_vip where
-        vip_id=#{vip_id}
+    <insert id="addList" parameterType="java.util.List">
+        insert into  tdse_orbbec_vip(vip_id,vip_type,vip_time,vip_price)
+        values
+        <foreach collection="list" item="item"  index="index" separator=",">
+            (#{item.vip_id},#{item.vip_type},#{item.vip_time},#{item.vip_price})
+        </foreach>
+    </insert>
+
+    <delete id="deleteAll" >
+        delete from tdse_orbbec_vip
     </delete>
 
-    <update id="updateOrbbecVip" parameterType="com.tdse.mx.dao.OrbVip">
+    <delete id="delete" parameterType="com.tdse.mx.dao.OrbVip">
+        delete from tdse_orbbec_vip
+        <where>
+            <if test="vip_id!=0">
+                and vip_id =#{vip_id}
+            </if>
+            <if test="vip_type!=null">
+                and  vip_type = #{vip_type}
+            </if>
+            <if test="vip_time!=null">
+                and  vip_time = #{vip_time}
+            </if>
+            <if test="vip_price!=null">
+                and  vip_price = #{vip_price}
+            </if>
+        </where>
+    </delete>
+
+    <update id="update" parameterType="com.tdse.mx.dao.OrbVip">
         update tdse_orbbec_vip set vip_type=#{vip_type},vip_time=#{vip_time},vip_price=#{vip_price}
         where vip_id=#{vip_id}
     </update>
 
+    <update id="updateList" parameterType="java.util.List">
+        <foreach collection="list" item="item" index="index" open="" close="" separator=";">
+            update tdse_orbbec_vip
+            <set>
+                vip_type = #{item.vip_type},vip_time = #{item.vip_time},vip_price = #{item.vip_price}
+            </set>
+            where vip_id = #{item.vip_id}
+        </foreach>
+    </update>
 </mapper>

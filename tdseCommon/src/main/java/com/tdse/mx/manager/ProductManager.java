@@ -83,7 +83,7 @@ public class ProductManager
      */
     public List<Product> query()
     {
-        return  ProductImpl.getInstance().findProduct();
+        return  null;
     }
 
     /**
@@ -93,7 +93,7 @@ public class ProductManager
      */
     public Product queryId(String id)
     {
-        return  ProductImpl.getInstance().findProductById(id);
+        return  null;
     }
 
     /**
@@ -103,7 +103,7 @@ public class ProductManager
      */
     public Product queryName(String name){
 
-        return  ProductImpl.getInstance().findProductByName(name);
+        return  null;
     }
 
     /**

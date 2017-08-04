@@ -10,6 +10,8 @@ import com.tdse.mx.util.MD5;
 import com.tdse.mx.util.Utils;
 import org.json.JSONObject;
 
+import java.util.List;
+
 /**
  * Created by Administrator on 2017/7/20.
  */
@@ -61,33 +63,38 @@ public class OrbOrderManager
 
         if (viptype!=null&&username!=null)
         {
-            OrbVip orbbecVip = OrbVipImpl.getInstance().findByType(viptype);
-            if (orbbecVip!=null)
+           // OrbVip orbbecVip = OrbVipImpl.getInstance().findByType(viptype);
+            OrbVip p =new OrbVip();
+            p.setVip_type(viptype);
+            List<OrbVip> orbbecVip = OrbVipImpl.getInstance().find(p);
+            if (orbbecVip.size()>0)
             {
-                OrbUser orbbecUser = OrbUserImpl.getInstance().findByName(username);
-
-                if (orbbecUser==null)
+                //OrbUser orbbecUser = OrbUserImpl.getInstance().findByName(username);
+                OrbUser o= new OrbUser();
+                o.setUser_name(username);
+                List<OrbUser> orbbecUser = OrbUserImpl.getInstance().find(o);
+                if (orbbecUser.size()==0)
                 {
                     OrbUser orbUser1 =new OrbUser();
                     orbUser1.setUser_signup_time(Utils.getCurrentTime());
                     orbUser1.setUser_name(username);
-                    OrbUserImpl.getInstance().addOrbbecUser(orbUser1);
+                    OrbUserImpl.getInstance().add(orbUser1);
                 }
 
                 OrbOrder order =new OrbOrder();
                 order.setOrder_user_name(username);
                 order.setOrder_id(""+Utils.getUuid());
                 order.setOrder_establish_time(Utils.getCurrentTime());
-                OrbOrderImpl.getInstance().addOrbbecOrder(order);
+                OrbOrderImpl.getInstance().add(order);
 
                 OrbClientRq rq=new OrbClientRq();
                 rq.setApp_order(order.getOrder_id());
                 rq.setAppid(appid);
                 rq.setCallback_url(callBackUrl);
                 rq.setCount(1);
-                rq.setGoods_id(""+orbbecVip.getVip_id());
-                rq.setGoods_name(orbbecVip.getVip_type());
-                rq.setUnit_price(orbbecVip.getVip_price());
+                rq.setGoods_id(""+orbbecVip.get(0).getVip_id());
+                rq.setGoods_name(orbbecVip.get(0).getVip_type());
+                rq.setUnit_price(orbbecVip.get(0).getVip_price());
 
                 return  JSON.toJSONString(rq);
             }
@@ -110,16 +117,20 @@ public class OrbOrderManager
         }
         if(cb!=null)
         {
-            OrbOrder oldOrder= OrbOrderImpl.getInstance().findById(cb.getApp_order());
+            OrbOrder o =new OrbOrder();
+            o.setOrder_id(cb.getApp_order());
 
-            if (oldOrder.getOrder_deal_time()!=null)
+            List<OrbOrder> order= OrbOrderImpl.getInstance().find(o);
+
+            if (order.size()>0&&order.get(0).getOrder_deal_time()!=null)
             {
                 System.out.println("订单已经交易完成,无法重复添加!");
                 return;
             }
 
+            OrbOrder oldOrder=order.get(0);
 
-            if (oldOrder!=null&&oldOrder.getOrder_id().equals(cb.getApp_order()))
+            if (oldOrder.getOrder_id().equals(cb.getApp_order()))
             {
                 oldOrder.setOrder_payment_user_name(cb.getUsername());
                 oldOrder.setOrder_establish_time(oldOrder.getOrder_establish_time());
@@ -132,7 +143,7 @@ public class OrbOrderManager
                 oldOrder.setOrder_total_fee(cb.getTotal_fee());
                 oldOrder.setOrder_orb_order(cb.getOrb_order());
                 oldOrder.setOrder_sign(cb.getSign());
-                OrbOrderImpl.getInstance().updateOrbbecOrder(oldOrder);
+                OrbOrderImpl.getInstance().update(oldOrder);
                 OrbUserManager.getInstance().setUserNewVipTime(oldOrder.getOrder_user_name(),Integer.parseInt(cb.getGoods_id()));
                  System.out.println("交易成功");
             }
@@ -203,7 +214,15 @@ public class OrbOrderManager
             return  JsonUtils.setResultData("false","Find Fail!").toString();
         }
 
-        return   JSON.toJSONString(OrbOrderImpl.getInstance().findByUserName(username));
+        OrbOrder o=new OrbOrder();
+        o.setOrder_user_name(username);
+        List<OrbOrder> orders =OrbOrderImpl.getInstance().find(o);
+
+        if(orders.size()>0){
+            return   JSON.toJSONString(orders.get(0));
+        }else {
+            return   JSON.toJSONString(null);
+        }
     }
 
     /**
@@ -221,8 +240,15 @@ public class OrbOrderManager
         {
             return  JsonUtils.setResultData("false","Find Fail!").toString();
         }
+        OrbOrder o=new OrbOrder();
+        o.setOrder_id(orderid);
+        List<OrbOrder> orders =OrbOrderImpl.getInstance().find(o);
 
-        return   JSON.toJSONString(OrbOrderImpl.getInstance().findById(orderid));
+        if(orders.size()>0){
+            return   JSON.toJSONString(orders.get(0));
+        }else {
+            return   JSON.toJSONString(null);
+        }
     }
 
     private String getAutograph(String username,String token,String nonce_str){
