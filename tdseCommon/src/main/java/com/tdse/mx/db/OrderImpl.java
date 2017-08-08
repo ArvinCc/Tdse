@@ -10,13 +10,11 @@ import java.util.List;
  */
 public class OrderImpl extends Impl<Order>
 {
+    private final String mapperName="orderMapper";
     //使用volatile关键字保其可见性
     volatile private static OrderImpl instance = null;
 
-    public OrderImpl()
-    {
-      mapperName="orderMapper";
-    }
+    public OrderImpl() {}
 
     public static OrderImpl getInstance() {
         try {
@@ -35,6 +33,11 @@ public class OrderImpl extends Impl<Order>
             e.printStackTrace();
         }
         return instance;
+    }
+    @Override
+    public String getMapperName()
+    {
+        return mapperName;
     }
 
 }

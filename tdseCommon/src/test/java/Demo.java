@@ -1,3 +1,13 @@
+import com.alibaba.fastjson.JSON;
+import com.alibaba.fastjson.JSONObject;
+import com.tdse.mx.dao.OrbUser;
+import com.tdse.mx.dao.Product;
+import com.tdse.mx.db.OrbOrderImpl;
+import com.tdse.mx.db.OrbUserImpl;
+import com.tdse.mx.db.OrbVipImpl;
+import com.tdse.mx.db.ProductImpl;
+import com.tdse.mx.manager.OrbOrderManager;
+
 /**
  * Created by Administrator on 2017/6/12.
  */
@@ -14,13 +24,13 @@ public class Demo {
         //System.out.println(OrbUserManager.getInstance().getUserVipTime("{\"downloadNumber\":1,\"username\":\"二狗\",\"state\":\"最热\",\"themeId\":\"1\"}"));
 
 //
+
 //        JSONObject jsonObject =new JSONObject();
 //        jsonObject.put("viptype","A");
 //        jsonObject.put("username","ob_wxoZaw0wdHxm8ica1Rgv8pYturB_FA");
 //         OrbOrderManager.getInstance().creatOrder(jsonObject.toString());
 
-
-       //OrbOrderManager.getInstance().dealOrder("{\"count\": 1, \"username\": \"ob_wxoZaw0wdHxm8ica1Rgv8pYturB_FA\", \"orb_order\": \"10000000000000000000000000001443\", \"total_fee\": \"1\", \"goods_id\": \"1\", \"appid\": 20002, \"sign\": \"4468742AA658B01E3A674DF3EFB9369D\", \"app_order\": \"0952cc3fdda74d82a04c8978c1dd311c\", \"unit_price\": 1, \"fee_type\": \"CNY\"}");
+         //OrbOrderManager.getInstance().dealOrder("{\"count\": 1, \"username\": \"ob_wxoZaw0wdHxm8ica1Rgv8pYturB_FA\", \"orb_order\": \"10000000000000000000000000001443\", \"total_fee\": \"1\", \"goods_id\": \"1\", \"appid\": 20002, \"sign\": \"4468742AA658B01E3A674DF3EFB9369D\", \"app_order\": \"80023ac609fb458794e1de0539f34f25\", \"unit_price\": 1, \"fee_type\": \"CNY\"}");
 //        String test =  SystemPropertyUtil.get("user.dir");
 //        int one = test.lastIndexOf("\\");
 //        System.out.println(test.replace(test.substring((one+1),test.length()),"DownLoad"));
@@ -63,6 +73,13 @@ public class Demo {
 
 
 //      UserImpl.getInstance().delete(o);
+
+       // Product product =new Product();
+        //product.setName("地铁安全s");
+
+         // System.out.println("|是|"+ JSON.toJSONString(OrbUserImpl.getInstance().find()));
+
+     OrbOrderManager.getInstance().clearOrder();
     }
 
 

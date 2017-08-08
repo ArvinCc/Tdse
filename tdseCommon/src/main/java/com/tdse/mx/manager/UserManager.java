@@ -85,6 +85,4 @@ public class UserManager {
 //       return JsonUtils.setResultData("true",jsonObject);
 //   }
 
-
-
 }

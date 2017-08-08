@@ -19,10 +19,10 @@
             <if test="details_name!=null">
                 and  details_name = #{details_name}
             </if>
-            <if test="details_order_id!=null">
+            <if test="details_order_id!=0">
                 and  details_order_id = #{details_order_id}
             </if>
-            <if test="details_money!=null">
+            <if test="details_money!=0">
                 and  details_money = #{details_money}
             </if>
             <if test="details_start_time!=null">
@@ -31,7 +31,7 @@
             <if test="details_end_time!=null">
                 and  details_end_time = #{details_end_time}
             </if>
-            <if test="details_user_id!=null">
+            <if test="details_user_id!=0">
                 and  details_user_id = #{details_user_id}
             </if>
         </where>
@@ -63,10 +63,10 @@
             <if test="details_name!=null">
                 and  details_name = #{details_name}
             </if>
-            <if test="details_order_id!=null">
+            <if test="details_order_id!=0">
                 and  details_order_id = #{details_order_id}
             </if>
-            <if test="details_money!=null">
+            <if test="details_money!=0">
                 and  details_money = #{details_money}
             </if>
             <if test="details_start_time!=null">
@@ -75,7 +75,7 @@
             <if test="details_end_time!=null">
                 and  details_end_time = #{details_end_time}
             </if>
-            <if test="details_user_id!=null">
+            <if test="details_user_id!=0">
                 and  details_user_id = #{details_user_id}
             </if>
         </where>

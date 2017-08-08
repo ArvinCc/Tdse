@@ -8,11 +8,11 @@ import com.alibaba.fastjson.JSON;
 public class OrbClientRq
 {
 
-    public String getAppid() {
+    public int getAppid() {
         return appid;
     }
 
-    public void setAppid(String appid) {
+    public void setAppid(int appid) {
         this.appid = appid;
     }
 
@@ -85,7 +85,7 @@ public class OrbClientRq
     /**
      * 应用id
      */
-    private String appid;
+    private int appid;
 
     /**
      * 商品id

@@ -83,7 +83,7 @@ public class ProductManager
      */
     public List<Product> query()
     {
-        return  null;
+        return  ProductImpl.getInstance().find();
     }
 
     /**
@@ -101,9 +101,12 @@ public class ProductManager
      * @param name 产品名字
      * @return
      */
-    public Product queryName(String name){
+    public Product queryName(String name)
+    {
+        Product product =new Product();
+        product.setName(name);
 
-        return  null;
+        return  ProductImpl.getInstance().find(product).get(0);
     }
 
     /**

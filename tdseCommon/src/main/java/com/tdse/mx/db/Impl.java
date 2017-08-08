@@ -1,6 +1,7 @@
 package com.tdse.mx.db;
 
 import com.tdse.mx.intf.IOperation;
+import org.apache.ibatis.session.SqlSession;
 
 import java.util.List;
 
@@ -9,56 +10,76 @@ import java.util.List;
  */
 public class Impl<T> implements IOperation<T>
 {
-    public String mapperName;
+
+    public  String getMapperName()
+    {
+        return null;
+    }
 
     public List<T> find()
     {
-        List<T> ts = DbUtils.getInstance().getSession().selectList(mapperName+".findAll");
-        DbUtils.getInstance().getSession().commit();
+        SqlSession session =DbUtils.getInstance().getSession();
+        List<T> ts = session.selectList(getMapperName()+".findAll");
+        session.commit();
+        session.close();
         return ts;
     }
 
     public List<T> find(T t)
     {
-        List<T> ts = DbUtils.getInstance().getSession().selectList(mapperName+".find",t);
-        DbUtils.getInstance().getSession().commit();
+        SqlSession session =DbUtils.getInstance().getSession();
+        List<T> ts =session.selectList(getMapperName()+".find",t);
+        session.commit();
+        session.close();
         return ts;
     }
 
     public void delete()
     {
-        DbUtils.getInstance().getSession().delete(mapperName+".deleteAll");
-        DbUtils.getInstance().getSession().commit();
+        SqlSession session =DbUtils.getInstance().getSession();
+        session.delete(getMapperName()+".deleteAll");
+        session.commit();
+        session.close();
     }
 
     public void delete(T t)
     {
-        DbUtils.getInstance().getSession().delete(mapperName+".delete", t);
-        DbUtils.getInstance().getSession().commit();
+        SqlSession session =DbUtils.getInstance().getSession();
+        session.delete(getMapperName()+".delete", t);
+        session.commit();
+        session.close();
     }
 
     public void add(List<T> t)
     {
-        DbUtils.getInstance().getSession().insert(mapperName+".addList", t);
-        DbUtils.getInstance().getSession().commit();
+        SqlSession session =DbUtils.getInstance().getSession();
+        session.insert(getMapperName()+".addList", t);
+        session.commit();
+        session.close();
     }
 
     public void add(T t)
     {
-        DbUtils.getInstance().getSession().insert(mapperName+".add", t);
-        DbUtils.getInstance().getSession().commit();
+        SqlSession session =DbUtils.getInstance().getSession();
+        session.insert(getMapperName()+".add", t);
+        session.commit();
+        session.close();
     }
 
     public void update(T t)
     {
-        DbUtils.getInstance().getSession().update(mapperName+".update", t);
-        DbUtils.getInstance().getSession().commit();
+        SqlSession session =DbUtils.getInstance().getSession();
+        session.update(getMapperName()+".update", t);
+        session.commit();
+        session.close();
     }
 
     public void update(List<T> t)
     {
-        DbUtils.getInstance().getSession().update(mapperName+".updateList", t);
-        DbUtils.getInstance().getSession().commit();
+        SqlSession session =DbUtils.getInstance().getSession();
+        session.update(getMapperName()+".updateList", t);
+        session.commit();
+        session.close();
     }
 
 }

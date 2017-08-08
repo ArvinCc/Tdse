@@ -7,14 +7,12 @@ import com.tdse.mx.dao.OrbVip;
  */
 public class OrbVipImpl extends Impl<OrbVip>
 {
-
+    private final String mapperName="orbbecVipMapper";
     //使用volatile关键字保其可见性
     volatile private static OrbVipImpl instance = null;
 
 
-    public OrbVipImpl() {
-      mapperName="orbbecVipMapper";
-    }
+    public OrbVipImpl() {}
 
     public static OrbVipImpl getInstance() {
         try {
@@ -35,4 +33,9 @@ public class OrbVipImpl extends Impl<OrbVip>
         return instance;
     }
 
+    @Override
+    public String getMapperName()
+    {
+        return mapperName;
+    }
 }

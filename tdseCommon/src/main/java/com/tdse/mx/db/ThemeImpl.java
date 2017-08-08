@@ -10,13 +10,11 @@ import java.util.List;
  */
 public class ThemeImpl extends Impl<Theme>
 {
+    private final String mapperName="theMapper";
     //使用volatile关键字保其可见性
     volatile private static ThemeImpl instance = null;
 
-    private ThemeImpl()
-    {
-       mapperName="theMapper";
-    }
+    private ThemeImpl() {}
 
     public static ThemeImpl getInstance() {
         try {
@@ -36,6 +34,10 @@ public class ThemeImpl extends Impl<Theme>
         }
         return instance;
     }
-
+    @Override
+    public String getMapperName()
+    {
+        return mapperName;
+    }
 
 }

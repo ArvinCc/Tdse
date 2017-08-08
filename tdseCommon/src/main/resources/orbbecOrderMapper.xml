@@ -9,6 +9,11 @@
         select * from tdse_orbbec_order
     </select>
 
+    <!--获得所有  -->
+    <select id="findAllPaging"  resultType="com.tdse.mx.dao.OrbOrder">
+        Select * from tdse_orbbec_order limit #{p1},#{p2}
+    </select>
+
     <!--获得条件筛选后  -->
     <select id="find"  resultType="com.tdse.mx.dao.OrbOrder">
         select * from tdse_orbbec_order
@@ -28,7 +33,7 @@
             <if test="order_deal_time!=null">
                 and  order_deal_time = #{order_deal_time}
             </if>
-            <if test="order_appid!=null">
+            <if test="order_appid!=0">
                 and  order_appid = #{order_appid}
             </if>
             <if test="order_goods_id!=null">
@@ -37,13 +42,13 @@
             <if test="order_fee_type!=null">
                 and  order_fee_type = #{order_fee_type}
             </if>
-            <if test="order_uint_price!=null">
+            <if test="order_uint_price!=0">
                 and  order_uint_price = #{order_uint_price}
             </if>
-            <if test="order_count!=null">
+            <if test="order_count!=0">
                 and  order_count = #{order_count}
             </if>
-            <if test="order_total_fee!=null">
+            <if test="order_total_fee!=0">
                 and  order_total_fee = #{order_total_fee}
             </if>
             <if test="order_orb_order!=null">
@@ -89,7 +94,7 @@
             <if test="order_deal_time!=null">
                 and  order_deal_time = #{order_deal_time}
             </if>
-            <if test="order_appid!=null">
+            <if test="order_appid!=0">
                 and  order_appid = #{order_appid}
             </if>
             <if test="order_goods_id!=null">
@@ -98,13 +103,13 @@
             <if test="order_fee_type!=null">
                 and  order_fee_type = #{order_fee_type}
             </if>
-            <if test="order_uint_price!=null">
+            <if test="order_uint_price!=0">
                 and  order_uint_price = #{order_uint_price}
             </if>
-            <if test="order_count!=null">
+            <if test="order_count!=0">
                 and  order_count = #{order_count}
             </if>
-            <if test="order_total_fee!=null">
+            <if test="order_total_fee!=0">
                 and  order_total_fee = #{order_total_fee}
             </if>
             <if test="order_orb_order!=null">

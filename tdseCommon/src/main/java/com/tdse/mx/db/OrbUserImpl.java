@@ -7,13 +7,12 @@ import com.tdse.mx.dao.OrbUser;
  */
 public class OrbUserImpl extends Impl<OrbUser>
 {
+    private final String mapperName="orbbecUserMapper";
+
     //使用volatile关键字保其可见性
     volatile private static OrbUserImpl instance = null;
 
-
-    public OrbUserImpl() {
-        mapperName="orbbecUserMapper";
-    }
+    public OrbUserImpl() {}
 
     public static OrbUserImpl getInstance() {
         try {
@@ -32,5 +31,11 @@ public class OrbUserImpl extends Impl<OrbUser>
             e.printStackTrace();
         }
         return instance;
+    }
+
+    @Override
+    public String getMapperName()
+    {
+        return mapperName;
     }
 }

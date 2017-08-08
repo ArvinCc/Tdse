@@ -19,10 +19,10 @@
             <if test="theme_name!=null">
                 and  theme_name = #{theme_name}
             </if>
-            <if test="theme_money!=null">
+            <if test="theme_money!=0">
                 and  theme_money = #{theme_money}
             </if>
-            <if test="user_phone_number!=null">
+            <if test="theme_introduce!=null">
                 and  theme_introduce = #{theme_introduce}
             </if>
         </where>
@@ -53,7 +53,7 @@
             <if test="theme_name!=null">
                 and  theme_name = #{theme_name}
             </if>
-            <if test="theme_money!=null">
+            <if test="theme_money!=0">
                 and  theme_money = #{theme_money}
             </if>
             <if test="theme_introduce!=null">

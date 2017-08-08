@@ -10,13 +10,13 @@ import java.util.List;
  */
 public class UserImpl extends Impl<User>
 {
+
+    private final String mapperName="userMapper";
+
     //使用volatile关键字保其可见性
     volatile private static UserImpl instance = null;
 
-    private UserImpl()
-    {
-        mapperName ="userMapper";
-    }
+    private UserImpl() {}
 
     public static UserImpl getInstance() {
         try {
@@ -37,4 +37,9 @@ public class UserImpl extends Impl<User>
         return instance;
     }
 
+    @Override
+    public String getMapperName()
+    {
+        return mapperName;
+    }
 }

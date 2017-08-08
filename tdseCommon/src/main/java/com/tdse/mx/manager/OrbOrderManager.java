@@ -10,6 +10,8 @@ import com.tdse.mx.util.MD5;
 import com.tdse.mx.util.Utils;
 import org.json.JSONObject;
 
+import java.sql.Timestamp;
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -17,7 +19,7 @@ import java.util.List;
  */
 public class OrbOrderManager
 {
-    private final String appid="20002";
+    private final int appid=20002;
     private final String appkey="1916cfc07c6f5aee3526298bbd9481b8";
     private final String secretkey="14c7e18495ec5a8689c9246d1c4e70eb";
     private final String spacer="&";
@@ -119,9 +121,9 @@ public class OrbOrderManager
         {
             OrbOrder o =new OrbOrder();
             o.setOrder_id(cb.getApp_order());
-
             List<OrbOrder> order= OrbOrderImpl.getInstance().find(o);
 
+            System.out.println(""+order.size());
             if (order.size()>0&&order.get(0).getOrder_deal_time()!=null)
             {
                 System.out.println("订单已经交易完成,无法重复添加!");
@@ -195,6 +197,26 @@ public class OrbOrderManager
                 ,nonce_str
         ));
         return result.toString();
+    }
+
+
+    public  void clearOrder()
+    {
+        List<OrbOrder> orders =OrbOrderImpl.getInstance().find();
+
+        Timestamp currentTime =Utils.getCurrentTime();
+
+        for (int i =0;i<orders.size();i++)
+        {
+            OrbOrder ob = orders.get(i);
+
+           long time= (currentTime.getTime()-ob.getOrder_establish_time().getTime())/(1000*60);
+
+           if (time>60&&ob.getOrder_deal_time()==null)
+           {
+                 OrbOrderImpl.getInstance().delete(ob);
+           }
+        }
     }
 
 

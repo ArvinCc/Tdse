@@ -11,7 +11,7 @@
 
     <!--获得条件筛选后  -->
     <select id="find"  resultType="com.tdse.mx.dao.OrbVip">
-        select * from tdse_user
+        select * from tdse_orbbec_vip
         <where>
             <if test="vip_id!=0">
                 and vip_id =#{vip_id}
@@ -19,10 +19,10 @@
             <if test="vip_type!=null">
                 and  vip_type = #{vip_type}
             </if>
-            <if test="vip_time!=null">
+            <if test="vip_time!=0">
                 and  vip_time = #{vip_time}
             </if>
-            <if test="vip_price!=null">
+            <if test="vip_price!=0">
                 and  vip_price = #{vip_price}
             </if>
         </where>
@@ -53,10 +53,10 @@
             <if test="vip_type!=null">
                 and  vip_type = #{vip_type}
             </if>
-            <if test="vip_time!=null">
+            <if test="vip_time!=0">
                 and  vip_time = #{vip_time}
             </if>
-            <if test="vip_price!=null">
+            <if test="vip_price!=0">
                 and  vip_price = #{vip_price}
             </if>
         </where>

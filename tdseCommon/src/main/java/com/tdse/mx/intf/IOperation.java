@@ -7,9 +7,12 @@ import java.util.List;
  */
 public interface IOperation <T>
 {
+
     List<T> find();
 
     List<T> find(T t);
+
+    //T findOne(T t);
 
     void delete();
 
@@ -22,4 +25,5 @@ public interface IOperation <T>
     void update(T t);
 
     void update(List<T> t);
+
 }

@@ -1,5 +1,7 @@
 package com.tdse.mx.server;
 
+import com.tdse.mx.event.TimingEvent;
+
 /**
  * Created by Administrator on 2017/6/15.
  */
@@ -20,5 +22,8 @@ public class TdseMain
         Thread threads =new Thread(new HttpServer(3200));
         thread.start();
         threads.start();
+
+        Thread threadss =new Thread(new TimingEvent());
+        threadss.start();
     }
 }

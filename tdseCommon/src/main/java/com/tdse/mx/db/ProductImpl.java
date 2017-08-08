@@ -10,13 +10,12 @@ import java.util.List;
  */
 public class ProductImpl extends Impl<Product>
 {
+    private final String mapperName="productMapper";
+
     //使用volatile关键字保其可见性
     volatile private static ProductImpl instance = null;
 
-    public ProductImpl()
-    {
-        mapperName="productMapper";
-    }
+    public ProductImpl() {}
 
     public static ProductImpl getInstance()
     {
@@ -37,5 +36,10 @@ public class ProductImpl extends Impl<Product>
             e.printStackTrace();
         }
         return instance;
+    }
+    @Override
+    public String getMapperName()
+    {
+        return mapperName;
     }
 }

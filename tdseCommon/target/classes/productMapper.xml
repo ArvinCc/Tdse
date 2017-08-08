@@ -21,7 +21,7 @@
             <if test="product_theme_name!=null">
                 and  product_theme_name = #{product_theme_name}
             </if>
-            <if test="product_money!=null">
+            <if test="product_money!=0">
                 and  product_money = #{product_money}
             </if>
             <if test="product_introduce!=null">
@@ -30,7 +30,7 @@
             <if test="product_grade!=null">
                 and  product_grade = #{product_grade}
             </if>
-            <if test="product_download_number!=null">
+            <if test="product_download_number!=0">
                 and  product_download_number = #{product_download_number}
             </if>
             <if test="product_edition!=null">
@@ -74,7 +74,7 @@
             <if test="product_theme_name!=null">
                 and  product_theme_name = #{product_theme_name}
             </if>
-            <if test="product_money!=null">
+            <if test="product_money!=0">
                 and  product_money = #{product_money}
             </if>
             <if test="product_introduce!=null">
@@ -83,7 +83,7 @@
             <if test="product_grade!=null">
                 and  product_grade = #{product_grade}
             </if>
-            <if test="product_download_number!=null">
+            <if test="product_download_number!=0">
                 and  product_download_number = #{product_download_number}
             </if>
             <if test="product_edition!=null">

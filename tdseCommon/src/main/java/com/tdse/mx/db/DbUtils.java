@@ -14,7 +14,6 @@ import java.io.Reader;
 public class DbUtils
 {
     private SqlSessionFactory sessionFactory;
-    private SqlSession session;
 
     //使用volatile关键字保其可见性
     volatile private static DbUtils instance = null;
@@ -24,7 +23,6 @@ public class DbUtils
         try {
             Reader reader = Resources.getResourceAsReader(resource);
             sessionFactory = new SqlSessionFactoryBuilder().build(reader);
-            session = sessionFactory.openSession();
         } catch (IOException e) {
             e.printStackTrace();
         }
@@ -56,8 +54,6 @@ public class DbUtils
 
     public SqlSession getSession()
     {
-        return session;
+        return sessionFactory.openSession();
     }
-
-
 }

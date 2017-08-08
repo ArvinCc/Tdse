@@ -143,6 +143,7 @@ public class OrbVipManager
 
         if (viptype.equals(""))
         {
+            System.out.println("VIP  ALL"+OrbVipImpl.getInstance().find().toString());
             return JSON.toJSONString(OrbVipImpl.getInstance().find());
         }else {
 
@@ -151,8 +152,10 @@ public class OrbVipManager
            List<OrbVip> oo= OrbVipImpl.getInstance().find(o);
 
            if(oo.size()>0){
+               System.out.println("oo.get(0)"+oo.get(0).toString());
                return JSON.toJSONString(oo.get(0));
            }else{
+               System.out.println("null");
                return JSON.toJSONString(null);
            }
         }

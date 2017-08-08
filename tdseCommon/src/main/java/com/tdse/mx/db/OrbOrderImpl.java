@@ -1,19 +1,21 @@
 package com.tdse.mx.db;
 
 import com.tdse.mx.dao.OrbOrder;
+import org.apache.ibatis.session.SqlSession;
+
+import java.util.List;
 
 /**
  * Created by Administrator on 2017/7/13.
  */
 public class OrbOrderImpl extends Impl<OrbOrder>
 {
+    private final String mapperName="orbbecOrderMapper";
+
     //使用volatile关键字保其可见性
     volatile private static OrbOrderImpl instance = null;
 
-    public OrbOrderImpl()
-    {
-        mapperName="orbbecOrderMapper";
-    }
+    public OrbOrderImpl() {}
 
     public static OrbOrderImpl getInstance() {
         try {
@@ -32,5 +34,20 @@ public class OrbOrderImpl extends Impl<OrbOrder>
             e.printStackTrace();
         }
         return instance;
+    }
+
+    @Override
+    public String getMapperName()
+    {
+        return mapperName;
+    }
+
+
+    public void findPaging()
+    {
+        SqlSession session =DbUtils.getInstance().getSession();
+        List<OrbOrder> ts = session.selectList(getMapperName()+".findAllPaging");
+        session.commit();
+        session.close();
     }
 }

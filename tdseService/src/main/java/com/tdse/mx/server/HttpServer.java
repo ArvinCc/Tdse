@@ -19,7 +19,8 @@ public class HttpServer extends Thread
     public static final boolean SSL = System.getProperty("ssl") != null;
     private int PORT;
 
-    public HttpServer(int port) {
+    public HttpServer(int port)
+    {
         this.PORT = port;
     }
 
