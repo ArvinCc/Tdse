@@ -1,2 +1,6 @@
-com\tdse\mx\home\Home.class
+Main.class
 com\tdse\mx\home\RunState.class
+com\tdse\mx\home\Home$1.class
+com\tdse\mx\home\Home.class
+com\tdse\mx\intf\IUi.class
+com\tdse\mx\home\RunState$1.class

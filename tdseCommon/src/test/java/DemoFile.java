@@ -143,11 +143,6 @@ public static void CopyFile(){
 }
 
 
-
-
-
-
-
      public static byte[] head(byte[] data)
      {
          String name ="测试游戏.unitypackage";

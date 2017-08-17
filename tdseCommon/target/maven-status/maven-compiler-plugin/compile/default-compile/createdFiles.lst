@@ -16,6 +16,7 @@ com\tdse\mx\dao\OrderDetails.class
 com\tdse\mx\db\OrderImpl.class
 com\tdse\mx\db\OrbVipImpl.class
 com\tdse\mx\db\ThemeImpl.class
+com\tdse\mx\log\TestLog.class
 com\tdse\mx\dao\OrbOrder.class
 com\tdse\mx\dao\User.class
 com\tdse\mx\db\Impl.class

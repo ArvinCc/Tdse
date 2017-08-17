@@ -5,13 +5,13 @@ import com.tdse.mx.dao.*;
 import com.tdse.mx.db.OrbOrderImpl;
 import com.tdse.mx.db.OrbVipImpl;
 import com.tdse.mx.db.OrbUserImpl;
+import com.tdse.mx.log.TestLog;
 import com.tdse.mx.util.JsonUtils;
 import com.tdse.mx.util.MD5;
 import com.tdse.mx.util.Utils;
 import org.json.JSONObject;
 
 import java.sql.Timestamp;
-import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -116,6 +116,7 @@ public class OrbOrderManager
         }catch (Exception e)
         {
             System.out.println("订单交易异常错误:"+e);
+            TestLog.getInstance().WriteErrorLog("订单交易异常错误:"+e);
         }
         if(cb!=null)
         {
@@ -126,7 +127,8 @@ public class OrbOrderManager
             System.out.println(""+order.size());
             if (order.size()>0&&order.get(0).getOrder_deal_time()!=null)
             {
-                System.out.println("订单已经交易完成,无法重复添加!");
+                System.out.println("订单已经交易完成,无法重复交易!");
+                TestLog.getInstance().WriteErrorLog("订单已经交易完成,无法重复交易!交易信息是"+msg);
                 return;
             }
 
@@ -148,13 +150,16 @@ public class OrbOrderManager
                 OrbOrderImpl.getInstance().update(oldOrder);
                 OrbUserManager.getInstance().setUserNewVipTime(oldOrder.getOrder_user_name(),Integer.parseInt(cb.getGoods_id()));
                  System.out.println("交易成功");
+                TestLog.getInstance().WriteErrorLog("交易成功！订单编号："+cb.getApp_order());
             }
             else {
                 System.out.println("交易不成功！原始订单查找不到");
+                TestLog.getInstance().WriteErrorLog("交易不成功！原始订单查找不到"+msg);
             }
         }
         else {
             System.out.println("交易不成功！解析错误");
+            TestLog.getInstance().WriteErrorLog("交易不成功！解析错误"+msg);
         }
     }
     /**

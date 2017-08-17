@@ -1,6 +1,7 @@
 package com.tdse.mx.server;
 
 import com.tdse.mx.handler.TdseHttpInitializer;
+import com.tdse.mx.log.TestLog;
 import com.tdse.mx.util.Utils;
 import io.netty.bootstrap.ServerBootstrap;
 import io.netty.channel.Channel;
@@ -43,13 +44,14 @@ public class HttpServer extends Thread
                     .childHandler(new TdseHttpInitializer(sslCtx));
 
             Channel ch = b.bind(PORT).sync().channel();
-            System.out.println("Open your web browser and navigate to " +
+//            System.out.println("Open your web browser and navigate to " +
+//                    (SSL ? "https" : "http") + "://127.0.0.1:" + PORT + '/');
+            TestLog.getInstance().WriteServiceLog("Open your web browser and navigate to " +
                     (SSL ? "https" : "http") + "://127.0.0.1:" + PORT + '/');
-
             ch.closeFuture().sync();
         }catch (Exception e){
 
-
+            TestLog.getInstance().WriteErrorLog("Socket Server start fail! " +e);
         }finally {
             bossGroup.shutdownGracefully();
             workerGroup.shutdownGracefully();

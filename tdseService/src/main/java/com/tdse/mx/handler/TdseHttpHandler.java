@@ -1,22 +1,18 @@
 package com.tdse.mx.handler;
 
 import com.tdse.mx.event.HttpEventManager;
-import com.tdse.mx.event.SocketEventManager;
+import com.tdse.mx.log.TestLog;
 import com.tdse.mx.server.HttpServer;
 import io.netty.buffer.ByteBuf;
 import io.netty.buffer.Unpooled;
 import io.netty.channel.*;
 import io.netty.handler.codec.http.*;
 import io.netty.handler.codec.http.websocketx.*;
-import io.netty.handler.ssl.SslHandler;
-import io.netty.handler.stream.ChunkedFile;
 import io.netty.util.CharsetUtil;
 import io.netty.util.internal.SystemPropertyUtil;
 
 import javax.activation.MimetypesFileTypeMap;
 import java.io.File;
-import java.io.FileNotFoundException;
-import java.io.RandomAccessFile;
 import java.io.UnsupportedEncodingException;
 import java.net.URLDecoder;
 import java.text.SimpleDateFormat;
@@ -71,7 +67,7 @@ public class TdseHttpHandler extends SimpleChannelInboundHandler<Object>
             }
         }catch (Exception e)
         {
-            System.out.println("http-Get-错误");
+            TestLog.getInstance().WriteErrorLog("http-Get-错误");
         }
     }
 
@@ -84,7 +80,7 @@ public class TdseHttpHandler extends SimpleChannelInboundHandler<Object>
         // Handle a bad request.
         if (!req.decoderResult().isSuccess())
         {
-            System.out.println("不良请求");
+            TestLog.getInstance().WriteErrorLog("http-Get-不良请求");
             sendHttpResponse(ctx, req, new DefaultFullHttpResponse(HTTP_1_1, BAD_REQUEST));
             return;
         }

@@ -1,5 +1,6 @@
 package com.tdse.mx.handler;
 
+import com.tdse.mx.log.TestLog;
 import io.netty.buffer.ByteBuf;
 import io.netty.buffer.Unpooled;
 import io.netty.channel.*;
@@ -250,6 +251,7 @@ public class TdseHttpFileHandler extends SimpleChannelInboundHandler<FullHttpReq
                 HTTP_1_1, status, Unpooled.copiedBuffer("Failure: " + status + "\r\n", CharsetUtil.UTF_8));
         response.headers().set(HttpHeaderNames.CONTENT_TYPE, "text/plain; charset=UTF-8");
 
+        TestLog.getInstance().WriteErrorLog("sendError"+response.toString());
         // Close the connection as soon as the error message is sent.
         ctx.writeAndFlush(response).addListener(ChannelFutureListener.CLOSE);
     }

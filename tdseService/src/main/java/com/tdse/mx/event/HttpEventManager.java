@@ -1,8 +1,7 @@
 package com.tdse.mx.event;
 
+import com.tdse.mx.log.TestLog;
 import com.tdse.mx.manager.OrbOrderManager;
-import com.tdse.mx.manager.OrbUserManager;
-import com.tdse.mx.server.FileDemo;
 import com.tdse.mx.util.Utils;
 
 /**
@@ -47,7 +46,7 @@ public class HttpEventManager extends Event
 
     public void postOrder(String msg)
     {
-        FileDemo.getInstance().Into("Http服务器 Post内容:"+msg+"时间:"+ Utils.getCurrentTime());
+        TestLog.getInstance().WriteServiceLog("Http服务器 Post内容:"+msg+"时间:"+ Utils.getCurrentTime());
         OrbOrderManager.getInstance().dealOrder(msg);
     }
 

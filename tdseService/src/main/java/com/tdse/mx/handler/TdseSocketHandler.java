@@ -1,7 +1,7 @@
 package com.tdse.mx.handler;
 
 import com.tdse.mx.event.SocketEventManager;
-import com.tdse.mx.server.FileDemo;
+import com.tdse.mx.log.TestLog;
 import com.tdse.mx.util.Utils;
 import io.netty.buffer.ByteBuf;
 import io.netty.buffer.Unpooled;
@@ -9,8 +9,6 @@ import io.netty.channel.ChannelFuture;
 import io.netty.channel.ChannelFutureListener;
 import io.netty.channel.ChannelHandlerContext;
 import io.netty.channel.ChannelInboundHandlerAdapter;
-
-import java.util.*;
 
 /**
  * Created by Administrator on 2017/6/15.
@@ -98,7 +96,7 @@ public class TdseSocketHandler extends ChannelInboundHandlerAdapter
     @Override
     public void handlerAdded(ChannelHandlerContext ctx) throws Exception {
         super.handlerAdded(ctx);
-        System.out.println(ctx.channel().id() + "进来了");
+        TestLog.getInstance().WriteUserLog("Socket Server user:"+ctx.channel().id() + "进来了");
     }
 
     /**
@@ -109,7 +107,7 @@ public class TdseSocketHandler extends ChannelInboundHandlerAdapter
     @Override
     public void handlerRemoved(ChannelHandlerContext ctx) throws Exception {
         super.handlerRemoved(ctx);
-        System.out.println(ctx.channel().id()+"离开了");
+        TestLog.getInstance().WriteUserLog("Socket Server user:"+ctx.channel().id() + "离开了");
     }
 
     /**
@@ -168,8 +166,7 @@ public class TdseSocketHandler extends ChannelInboundHandlerAdapter
                 });
             }catch (Exception e)
             {
-                FileDemo.getInstance().Into("Socket错误:"+e+"时间:"+ Utils.getCurrentTime());
-                System.out.println("错误:"+e);
+                TestLog.getInstance().WriteErrorLog("Socket错误:"+e+"时间:"+ Utils.getCurrentTime());
             }
 //        ByteBuf in = (ByteBuf) msg;
 //        try {

@@ -1,6 +1,7 @@
 package com.tdse.mx.server;
 
 import com.tdse.mx.handler.TdseSocketHandler;
+import com.tdse.mx.log.TestLog;
 import io.netty.bootstrap.ServerBootstrap;
 import io.netty.channel.ChannelFuture;
 import io.netty.channel.ChannelInitializer;
@@ -42,11 +43,11 @@ public class SocketServer extends Thread
                     .childOption(ChannelOption.SO_KEEPALIVE, true);
             ChannelFuture f = b.bind(port).sync();
             //FileDemo.getInstance().Into("Server Starting" + port);
-            System.out.println("Server Starting" + port);
+            TestLog.getInstance().WriteServiceLog("Socket Server: bind is"+port+"pror! Success!");
             f.channel().closeFuture().sync();
         }catch (Exception e)
         {
-
+            TestLog.getInstance().WriteErrorLog("Socket Server: bind is"+port+"pror! Fail!");
         } finally {
             workerGroup.shutdownGracefully();
             bossGroup.shutdownGracefully();

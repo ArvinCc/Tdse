@@ -1,6 +1,5 @@
 package com.tdse.mx.event;
 
-import com.tdse.mx.server.FileDemo;
 import com.tdse.mx.util.JsonUtils;
 import com.tdse.mx.util.Utils;
 

@@ -1,3 +1,3 @@
 Manifest-Version: 1.0
-Main-Class: com.tdse.mx.server.TdseMain
+com.tdse.mx.mian.Main-Class: com.tdse.mx.server.TdseMain
 

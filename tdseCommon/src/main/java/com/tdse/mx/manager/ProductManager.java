@@ -17,7 +17,6 @@ import java.util.List;
 public class ProductManager
 {
      private String productWarehousePath;
-     //private  String productWarehousePath="E:/Arvin/JAVA_PROJECT/ProductWarehouse/八大主题/测试安全";
 
 
     //使用volatile关键字保其可见性
@@ -72,7 +71,6 @@ public class ProductManager
      * @return 是否成功
      */
     public boolean removeName(String name){
-
 
         return  false;
     }
