@@ -27,7 +27,6 @@ public class User {
         return JSON.toJSONString(this);
     }
 
-
    public long getId(){
         return  user_id;
    }
